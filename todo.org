@@ -1,0 +1,30 @@
+prendre les coordonnées de chaque navire dans un array à 2 dimensions.
+PA = 2 colonnes. int coordPorteAvions[5][2]
+
+* placer les bateaux
+tant qu'il y a un bateau
+placer le bateau :
+while i < taille du bateau
+placeBateau()
+test range
+affiche le bateau placé
+copie des coordonnées dans array tableauJoueurs[numeroJoueur].coordPorteAvions[5][2]
+tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
+{65 , 2}
+{66 , 2}
+{67 , 2}
+{68 , 2}
+{69 , 2}
+}
+/while
+
+* tir
+joueur 1 voit plateau "masque" qui ne contient que des tildes
+tire [y][x] (reprendre placeBateau)
+loop dans tous les arrays contenant les coordonnées des bateaux
+si match
+affiche X dans le plateau maitre de l'adversaire à la place du = 
+La case correspondante du plateau masque = la case du plateau maitre.
+retranche 1 point de vie au bateau concerné
+sinon
+affiche O dans le plateau masque du joueur
