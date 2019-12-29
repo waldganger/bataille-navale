@@ -19,19 +19,20 @@ typedef struct joueur
   unsigned char contreTorpilleur2;
   unsigned char torpilleur;
   
-  int coordPorteAvions[4];
-  int coordCroiseur[4];
-  int coordContreTorpilleur[4];
-  int coordContreTorpilleur2[4];
-  int coordTorpilleur[4];
+  int coordPorteAvions[5][2];
+  int coordCroiseur[4][2];
+  int coordContreTorpilleur[3][2];
+  int coordContreTorpilleur2[3][2];
+  int coordTorpilleur[2][2];
   
 }joueur;
 
 extern joueur tableauJoueurs[TAILLE_MAX_TABLEAU];
 
-void plateauInit(char tableau[NOMBRELIGNES][NOMBRECOLONNES]);
-void affichePlateauDeJeu(char tableau[NOMBRELIGNES][NOMBRECOLONNES]);
+void plateauInit(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES]);
+void affichePlateauDeJeu(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES]);
 void plateauIndices(char *tableau, int n);
-int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES]);
+int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille);
+void placementGeneral(void);
 
 #endif

@@ -11,25 +11,28 @@ char plateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
 int numeroJoueur;
 joueur tableauJoueurs[];
 
-void plateauInit(char tableau[NOMBRELIGNES][NOMBRECOLONNES])
+void plateauInit(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
 {
   int i, j;
+  char *ptableau = &(*tableau)[0][0];
   for(i = 0; i < NOMBRELIGNES; i++)
     for(j = 0; j < NOMBRECOLONNES; j++)
-      tableau[i][j] = '~';  
+      //tableau[i][j] = '~';
+      *(ptableau + i * NOMBRECOLONNES + j) = '~';
 }
 
-void affichePlateauDeJeu(char tableau[NOMBRELIGNES][NOMBRECOLONNES])
+void affichePlateauDeJeu(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
 {
   int i, j;
+  char *ptableau = &(*tableau)[0][0];
   if(numeroJoueur > 0)
     printf("*** Joueur %d -- Plateau de %s. ***\n", numeroJoueur, tableauJoueurs[numeroJoueur - 1].nom);
   for(i = 0; i < NOMBRELIGNES; i++){
     for(j = 0; j < NOMBRECOLONNES ; j++){
       if (i == 10 && j == 0)
-	printf("[%d ]", tableau[i][j]);
+	printf("[%d ]", *(ptableau +i * NOMBRECOLONNES + j));
       else
-      printf("[%2c ]", tableau[i][j]);}
+	printf("[%2c ]", *(ptableau + i * NOMBRECOLONNES + j));}
     printf("\n");
   }
 }
@@ -53,22 +56,17 @@ void plateauIndices(char *plateauDeJeu, int n)
   //*pdepart = putchar('0');
 }
 
-int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES])
+int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille)
 {
   char x;			/* abcisses 0ABCDEFGHIJ */
   int y;			/* ordonnées 012345678910 */
   char *p1 = &tableau[0][0];
   char *p2 = &tableau[0][0];
-  printf("Entrez les coordonnées de votre porte-avions.\nEx : B 6 ou J7\n");
+  while (taille > 0){
+  printf("Entrez les coordonnées de votre %s.\nEx : B 6 ou J7\n", typeNavire);
   scanf(" %1c%2d", &x, &y);
   if((x < 65 || x > 74) || (y < 1 || y > 10)){
     printf("Coordonnées erronées.\n");
-    /* if (numeroJoueur > 0) */
-    /*   //plateauInit(plateauDeJeu2); */
-    /*   placeBateau(plateauDeJeu2); */
-    /*   else */
-    /*   //plateauInit(plateauDeJeu1); */
-    /*   placeBateau(plateauDeJeu1); */
     return -1;
   }
   printf("Vous avez entré les coordonnées %c - %d\n", x, y);
@@ -76,5 +74,12 @@ int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES])
   x -= 64;
   
   tableau[y][x] = '=';
+  taille -= 1;
+  }
   return 0;
+}
+
+void placementGeneral(void)
+{
+  
 }
