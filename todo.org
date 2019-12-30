@@ -2,7 +2,8 @@ prendre les coordonnées de chaque navire dans un array à 2 dimensions.
 PA = 2 colonnes. int coordPorteAvions[5][2]
 
 * placer les bateaux
-tant qu'il y a un bateau
+** DONE tant qu'il y a un bateau
+** placer la proue et la poupe seulement pour aller plus vite
 placer le bateau :
 while i < taille du bateau
 placeBateau()

@@ -80,14 +80,24 @@ char * switchPlateau(void)
 {
   char *pplateau = NULL;
   
-  if(numeroJoueur > 0)
+  if(numeroJoueur == 1)
     return pplateau = &plateauDeJeu1[0][0];
   else
     return pplateau = &plateauDeJeu2[0][0];
 
 }
 
-void placementGeneral(void)
+void deploiementFlotte(void)
+  // On code en dur l'appel de fonction pour placer chaque bateau
 {
-  
+  placeBateau(switchPlateau(), "porte-avions", 5);
+  affichePlateauDeJeu(switchPlateau());
+  placeBateau(switchPlateau(), "croiseur", 4);
+  affichePlateauDeJeu(switchPlateau());
+  placeBateau(switchPlateau(), "contre-torpilleur", 3);
+  affichePlateauDeJeu(switchPlateau());
+  placeBateau(switchPlateau(), "contre-torpilleur", 3);
+  affichePlateauDeJeu(switchPlateau());
+  placeBateau(switchPlateau(), "torpilleur", 2);
+  affichePlateauDeJeu(switchPlateau());
 }

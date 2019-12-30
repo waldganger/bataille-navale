@@ -15,6 +15,7 @@ void menuPrincipal(void);
 void creeJoueur(void);
 void afficheFicheJoueur(int numeroJoueur);
 void afficheTableauJoueurs (void);
+void initialisationJoueur(void);
 int quitter(void);
 
 int main(void)
@@ -35,28 +36,9 @@ void menuPrincipal(void)
   printf("4. Placer vos bateaux ?\n");
   printf("5. Quitter.\n");
   scanf("%d", &choixMenuPrincipal);
+  
   if(choixMenuPrincipal == 1){
-    
-    if(numeroJoueur > 0){
-      creeJoueur();
-      plateauInit(switchPlateau());
-      plateauIndices(switchPlateau());
-      affichePlateauDeJeu(switchPlateau());
-
-      menuPrincipal();
-    }
-    else{
-      
-      creeJoueur();
-      
-      plateauInit(switchPlateau());
-      plateauIndices(switchPlateau());
-      affichePlateauDeJeu(switchPlateau());
-      while (1){
-	placeBateau(switchPlateau(), "porte-avions", 5); // On code en dur le plac. pr ch bat.
-	affichePlateauDeJeu(switchPlateau());}
-      menuPrincipal();
-    }
+    initialisationJoueur();
 }
   
   else if(choixMenuPrincipal == 2){
@@ -124,6 +106,16 @@ void afficheTableauJoueurs (void)
   for(i = 0; *tableauJoueurs[i].nom && i < TAILLE_MAX_TABLEAU; i++)
     afficheFicheJoueur(i);
   menuPrincipal();
+}
+void initialisationJoueur(void)
+{
+  creeJoueur();
+  plateauInit(switchPlateau());
+  plateauIndices(switchPlateau());
+  affichePlateauDeJeu(switchPlateau());
+  deploiementFlotte();
+  menuPrincipal();
+
 }
 
 int quitter(void){

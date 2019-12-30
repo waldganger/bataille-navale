@@ -34,6 +34,8 @@ void affichePlateauDeJeu(char *ptableau);
 void plateauIndices(char *ptableau);
 int placeBateau(char *ptableau, char typeNavire[], int taille);
 char * switchPlateau(void);
-void placementGeneral(void);
+
+
+void deploiementFlotte(void);
 
 #endif
