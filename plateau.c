@@ -47,13 +47,14 @@ void plateauIndices(char *plateauDeJeu, int n)
     *plateauDeJeu = 65 + i;
     plateauDeJeu++;
   }
+  //ordonnées, char de 1 à 9
   for(i = 0; i < n-2; i++){
     *pdepart = 49 + i;
     pdepart += n;
   }
+  //10 != ASCII, alors on place un nombre
   *pdepart++ = 10;
-  //plateauDeJeu[11][10]='J';
-  //*pdepart = putchar('0');
+  
 }
 
 int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille)
