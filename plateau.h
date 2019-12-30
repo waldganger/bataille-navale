@@ -32,8 +32,8 @@ extern joueur tableauJoueurs[TAILLE_MAX_TABLEAU];
 void plateauInit(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES]);
 void affichePlateauDeJeu(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES]);
 void plateauIndices(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES]);
-//void plateauIndices(char *tableau, int n);
-int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille);
+int placeBateau(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille);
+void switchPlateau(void);
 void placementGeneral(void);
 
 #endif

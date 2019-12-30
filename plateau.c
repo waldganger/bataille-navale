@@ -55,12 +55,11 @@ void plateauIndices(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
   *(pOrdonnees + (i++ * NOMBRECOLONNES + j)) = (int) 10;
 }
 
-int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille)
+int placeBateau(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille)
 {
   char x;			/* abcisses 0ABCDEFGHIJ */
   int y;			/* ordonnées 012345678910 */
-  char *p1 = &tableau[0][0];
-  char *p2 = &tableau[0][0];
+  char *pCoordsNavire = &(*tableau)[0][0];
   while (taille > 0){
   printf("Entrez les coordonnées de votre %s.\nEx : B 6 ou J7\n", typeNavire);
   scanf(" %1c%2d", &x, &y);
@@ -71,12 +70,14 @@ int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], i
   printf("Vous avez entré les coordonnées %c - %d\n", x, y);
   (int) x;
   x -= 64;
-  
-  tableau[y][x] = '=';
+  *(pCoordsNavire + (y * NOMBRECOLONNES +x)) = '=';
+  //tableau[y][x] = '=';
   taille -= 1;
   }
   return 0;
 }
+
+
 
 void placementGeneral(void)
 {

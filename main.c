@@ -52,7 +52,7 @@ void menuPrincipal(void)
       plateauIndices(&plateauDeJeu1);
       affichePlateauDeJeu(&plateauDeJeu1);
       while (1){
-	placeBateau(plateauDeJeu1, "porte-avions", 5); // On code en dur le plac. pr ch bat.
+	placeBateau(&plateauDeJeu1, "porte-avions", 5); // On code en dur le plac. pr ch bat.
       affichePlateauDeJeu(&plateauDeJeu1);}
       menuPrincipal();
     }
