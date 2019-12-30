@@ -17,7 +17,6 @@ void plateauInit(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
   char *ptableau = &(*tableau)[0][0];
   for(i = 0; i < NOMBRELIGNES; i++)
     for(j = 0; j < NOMBRECOLONNES; j++)
-      //tableau[i][j] = '~';
       *(ptableau + i * NOMBRECOLONNES + j) = '~';
 }
 
@@ -36,25 +35,24 @@ void affichePlateauDeJeu(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
     printf("\n");
   }
 }
-
-void plateauIndices(char *plateauDeJeu, int n)
+void plateauIndices(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
 //A l'aide d'un pointeur et de la table ASCII, créée la ligne et la colonne d'indice.
 {
-  int i;
-  char *pdepart = plateauDeJeu + n;
-  plateauDeJeu++;
-  for (i = 0; i < n - 1; i++){
-    *plateauDeJeu = 65 + i;
-    plateauDeJeu++;
+  int i, j;
+  char *pAbcisses = &(*tableau)[0][0];
+  char *pOrdonnees = &(*tableau)[0][0];
+  
+  pAbcisses++;			/* On décale le pointeur d'une colonne. */
+  /* abcisses, de A à J */
+  for (i = 0; i < NOMBRECOLONNES - 1; i++){
+    *(pAbcisses + i) = 65 + i;
   }
   //ordonnées, char de 1 à 9
-  for(i = 0; i < n-2; i++){
-    *pdepart = 49 + i;
-    pdepart += n;
+  for(i = 1, j = 0; i < NOMBRECOLONNES - 1; i++){
+    *(pOrdonnees + (i * NOMBRECOLONNES + j)) = 48 + i ; // i = 1, donc on démarre à 48 au lieu de 49;
   }
-  //10 != ASCII, alors on place un nombre
-  *pdepart++ = 10;
-  
+  //10 != ASCII, alors on place un nombre en le castant en int.
+  *(pOrdonnees + (i++ * NOMBRECOLONNES + j)) = (int) 10;
 }
 
 int placeBateau(char tableau[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille)

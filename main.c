@@ -28,8 +28,6 @@ void menuPrincipal(void)
   int choixMenuPrincipal ;
   int choixDuJoueur;
   
-  
-  
   printf("Bienvenue. Voulez-vous :\n");
   printf("1. Créer une fiche joueur ?\n");
   printf("2. Afficher la fiche d'un joueur ?\n");
@@ -42,7 +40,7 @@ void menuPrincipal(void)
     if(numeroJoueur > 0){
       creeJoueur();
       plateauInit(&plateauDeJeu2);
-      plateauIndices(*plateauDeJeu2, NOMBRECOLONNES);
+      plateauIndices(&plateauDeJeu2);
       affichePlateauDeJeu(&plateauDeJeu2);
 
       menuPrincipal();
@@ -51,7 +49,7 @@ void menuPrincipal(void)
       
       creeJoueur();
       plateauInit(&plateauDeJeu1);
-      plateauIndices(*plateauDeJeu1, NOMBRECOLONNES);
+      plateauIndices(&plateauDeJeu1);
       affichePlateauDeJeu(&plateauDeJeu1);
       while (1){
 	placeBateau(plateauDeJeu1, "porte-avions", 5); // On code en dur le plac. pr ch bat.
