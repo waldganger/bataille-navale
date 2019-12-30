@@ -11,19 +11,18 @@ char plateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
 int numeroJoueur;
 joueur tableauJoueurs[];
 
-void plateauInit(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
+void plateauInit(char *ptableau)
 {
   int i, j;
-  char *ptableau = &(*tableau)[0][0];
+  //char *ptableau = &(*tableau)[0][0];
   for(i = 0; i < NOMBRELIGNES; i++)
     for(j = 0; j < NOMBRECOLONNES; j++)
       *(ptableau + i * NOMBRECOLONNES + j) = '~';
 }
 
-void affichePlateauDeJeu(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
+void affichePlateauDeJeu(char *ptableau)
 {
   int i, j;
-  char *ptableau = &(*tableau)[0][0];
   if(numeroJoueur > 0)
     printf("*** Joueur %d -- Plateau de %s. ***\n", numeroJoueur, tableauJoueurs[numeroJoueur - 1].nom);
   for(i = 0; i < NOMBRELIGNES; i++){
@@ -35,12 +34,12 @@ void affichePlateauDeJeu(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
     printf("\n");
   }
 }
-void plateauIndices(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
+void plateauIndices(char *ptableau)
 //A l'aide d'un pointeur et de la table ASCII, créée la ligne et la colonne d'indice.
 {
   int i, j;
-  char *pAbcisses = &(*tableau)[0][0];
-  char *pOrdonnees = &(*tableau)[0][0];
+  char *pAbcisses = ptableau;
+  char *pOrdonnees = ptableau;
   
   pAbcisses++;			/* On décale le pointeur d'une colonne. */
   /* abcisses, de A à J */
@@ -55,11 +54,11 @@ void plateauIndices(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES])
   *(pOrdonnees + (i++ * NOMBRECOLONNES + j)) = (int) 10;
 }
 
-int placeBateau(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille)
+int placeBateau(char *ptableau, char typeNavire[], int taille)
 {
   char x;			/* abcisses 0ABCDEFGHIJ */
   int y;			/* ordonnées 012345678910 */
-  char *pCoordsNavire = &(*tableau)[0][0];
+  char *pCoordsNavire = ptableau;
   while (taille > 0){
   printf("Entrez les coordonnées de votre %s.\nEx : B 6 ou J7\n", typeNavire);
   scanf(" %1c%2d", &x, &y);
@@ -77,7 +76,16 @@ int placeBateau(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[]
   return 0;
 }
 
+char * switchPlateau(void)
+{
+  char *pplateau = NULL;
+  
+  if(numeroJoueur > 0)
+    return pplateau = &plateauDeJeu1[0][0];
+  else
+    return pplateau = &plateauDeJeu2[0][0];
 
+}
 
 void placementGeneral(void)
 {

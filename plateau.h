@@ -29,11 +29,11 @@ typedef struct joueur
 
 extern joueur tableauJoueurs[TAILLE_MAX_TABLEAU];
 
-void plateauInit(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES]);
-void affichePlateauDeJeu(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES]);
-void plateauIndices(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES]);
-int placeBateau(char (*tableau)[NOMBRELIGNES][NOMBRECOLONNES], char typeNavire[], int taille);
-void switchPlateau(void);
+void plateauInit(char *ptableau);
+void affichePlateauDeJeu(char *ptableau);
+void plateauIndices(char *ptableau);
+int placeBateau(char *ptableau, char typeNavire[], int taille);
+char * switchPlateau(void);
 void placementGeneral(void);
 
 #endif

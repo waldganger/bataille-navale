@@ -39,21 +39,22 @@ void menuPrincipal(void)
     
     if(numeroJoueur > 0){
       creeJoueur();
-      plateauInit(&plateauDeJeu2);
-      plateauIndices(&plateauDeJeu2);
-      affichePlateauDeJeu(&plateauDeJeu2);
+      plateauInit(switchPlateau());
+      plateauIndices(switchPlateau());
+      affichePlateauDeJeu(switchPlateau());
 
       menuPrincipal();
     }
     else{
       
       creeJoueur();
-      plateauInit(&plateauDeJeu1);
-      plateauIndices(&plateauDeJeu1);
-      affichePlateauDeJeu(&plateauDeJeu1);
+      
+      plateauInit(switchPlateau());
+      plateauIndices(switchPlateau());
+      affichePlateauDeJeu(switchPlateau());
       while (1){
-	placeBateau(&plateauDeJeu1, "porte-avions", 5); // On code en dur le plac. pr ch bat.
-      affichePlateauDeJeu(&plateauDeJeu1);}
+	placeBateau(switchPlateau(), "porte-avions", 5); // On code en dur le plac. pr ch bat.
+	affichePlateauDeJeu(switchPlateau());}
       menuPrincipal();
     }
 }
