@@ -59,7 +59,7 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
   char xPoupe;			/* abcisses 0ABCDEFGHIJ */
   int yPoupe;			/* ordonnées 012345678910 */
   char *pCoordsNavire = ptableau;
-  
+    
     /* -------------- POUPE--------------- */
   printf("Entrez les coordonnées de la poupe de votre %s.\nEx : B 6 ou J7\n", typeNavire);
   scanf(" %1c%2d", &xPoupe, &yPoupe); // espace pour éviter un bug
@@ -76,6 +76,7 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
   /* -------------- PROUE--------------- */
   char xProue;
   int yProue;
+
   printf("Entrez les coordonnées de la proue votre %s.\nEx : B 6 ou J7\n", typeNavire);
   scanf(" %1c%2d", &xProue, &yProue);
   /* Test : case hors du cadre ? */
@@ -96,13 +97,24 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
   xProue -= 64;
   *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '=';
 
+  
   /* si le bateau est horizontal, on remplit les cases entre proue et poupe */
   if (yPoupe == yProue)
-    for(; xProue > xPoupe; xProue--)
-      *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '=';
-  /* 
-Non collé à un autre bateau 
-
+    
+    {
+      /* printf("xPoupe = %d\n", xPoupe); */
+      /* printf("xProue = %d\n", xProue); */
+      /* printf("yPoupe = %d\n", xPoupe); */
+      /* printf("yProue = %d\n", yProue); */
+      /* printf("%c\n", *(pVerification + (yPoupe * NOMBRECOLONNES + xPoupe - 1))); */
+      /* printf("%c\n", *(pVerification + (yProue * NOMBRECOLONNES + xProue + 1))); */
+      /* printf("%c\n", *(pVerification + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe - 1))); */
+      /* printf("%c\n", *(pVerification + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1))); */
+      /* printf("%c\n", *(pVerification + ((yProue +1) * NOMBRECOLONNES + xProue - 1))); */
+      /* printf("%c\n", *(pVerification + ((yProue +1) * NOMBRECOLONNES + xProue + 1))); */
+      	 
+      
+/*Mais d'abord, on vérifie que le bateau n'est pas collé à un autre 
 Si bateau horizontal :
 rien à gauche de la poupe
 rien à droite de la proue
@@ -112,9 +124,44 @@ rien à [+1][-1] de la proue
 rien à [+1][+1] de la proue
 rien en haut de chaque case
 rien en bas de chaque case
-
+*/
+    
+    if ( *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe - 1)) == '='
+	 || *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) == '='
+	 || *(pCoordsNavire + ((yPoupe -1) * NOMBRECOLONNES + xPoupe - 1)) == '='
+	 || *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1)) == '='
+	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) == '='
+	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '=')
+      {
+	*(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
+	*(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '~'; // on efface la proue
+	printf("Les bateaux ne doivent pas être collés.\n");
+	return 1;
+      }
+    for (; xProue > xPoupe; xProue--){
+      
+      if ( *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
+      	   || *(pCoordsNavire + ((yProue - 1) * NOMBRECOLONNES + xProue)) == '=')
+      	{
+	  *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe)) = '~'; // on efface la poupe
+	  //la proue ne s'efface pas car xProue décrémente dans la boucle.
+	  *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) = '~'; // on efface la proue
+      	  printf("Les bateaux ne doivent pas être collés.\n");
+      	  return 1;
+      	}
+	
+      *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue)) = '=';
+    }
+    
+    }
+  /* 
 Si bateau vertical :
-rien en haut de la poupe
+
+
+*/
+  
+  /* si le bateau est vertical, on vérifie que les cases adjacentes sont libres.
+     rien en haut de la poupe
 rien en bas de la proue
 rien à [-1][-1] de la poupe
 rien à [+1][-1] de la poupe
@@ -124,12 +171,51 @@ rien à gauche de chaque case
 rien à droite de chaque case
 
 */
+
   
-  /* si le bateau est vertical, on remplit les cases entre proue et poupe */
   else
-    for(; yProue > yPoupe; yProue--)
+    {
+    if ( *(pCoordsNavire + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe)) == '='
+	 || *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
+	 || *(pCoordsNavire + ((yPoupe -1) * NOMBRECOLONNES + xPoupe - 1)) == '='
+	 || *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1)) == '='
+	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) == '='
+	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '=')
+      {
+	/* *(pCoordsNavire + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe)) = '~'; */
+	/* *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) = '~'; */
+	/* *(pCoordsNavire + ((yPoupe -1) * NOMBRECOLONNES + xPoupe - 1)) = '~'; */
+	/* *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1)) = '~'; */
+	/* *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) = '~'; */
+	/* *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) = '~'; */
+	*(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
+	*(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '~'; // on efface la proue
+	
+	printf("Les bateaux ne doivent pas être collés.\n");
+	return 1;
+      }
+    
+    for(; yProue > yPoupe; yProue--){
+
+      if ( *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue - 1)) == '='
+      	   || *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) == '=')
+      	{
+	  /* *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue - 1)) = '~'; */
+      	  /* *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) = '~'; */
+
+	  *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
+	  //la proue ne s'efface pas car yProue décrémente dans la boucle.
+	  *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES +xProue)) = '~'; // on efface la proue
+	  
+      	  printf("Les bateaux ne doivent pas être collés.\n");
+      	  return 1;
+      	}
+      /* on remplit les cases entre proue et poupe  */
       *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '=';
-      
+    }
+
+    }
+  
   taille -= 1;			/* la taille servira à vérifier que le joueur dépasse pas. */
   
   return 0;
