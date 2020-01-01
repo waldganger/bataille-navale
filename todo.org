@@ -7,13 +7,15 @@ PA = 2 colonnes. int coordPorteAvions[5][2]
 * placer les bateaux
 ** DONE tant qu'il y a un bateau
 ** DONE placer la proue et la poupe seulement pour aller plus vite
-** faire en sorte qu'en cas d'erreur de placement, le programme return
+** DONE faire en sorte qu'en cas d'erreur de placement du bateau x, le programme boucle
+
 placer le bateau :
 while i < taille du bateau
 placeBateau()
 test range : 
-dans le cadre ? 
-en diagonale ? 
+** DONE dans le cadre ? 
+** DONE en diagonale ? 
+** DONE taille du bateau respectée ?
 Non collé à un autre bateau ? 
 Ne chevauche pas un autre bateau ?
 
