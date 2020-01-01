@@ -56,23 +56,55 @@ void plateauIndices(char *ptableau)
 
 int placeBateau(char *ptableau, char typeNavire[], int taille)
 {
-  char x;			/* abcisses 0ABCDEFGHIJ */
-  int y;			/* ordonnées 012345678910 */
+  char xPoupe;			/* abcisses 0ABCDEFGHIJ */
+  int yPoupe;			/* ordonnées 012345678910 */
   char *pCoordsNavire = ptableau;
-  while (taille > 0){
-  printf("Entrez les coordonnées de votre %s.\nEx : B 6 ou J7\n", typeNavire);
-  scanf(" %1c%2d", &x, &y);
-  if((x < 65 || x > 74) || (y < 1 || y > 10)){
+  
+    /* -------------- POUPE--------------- */
+  printf("Entrez les coordonnées de la poupe de votre %s.\nEx : B 6 ou J7\n", typeNavire);
+  scanf(" %1c%2d", &xPoupe, &yPoupe); // espace pour éviter un bug
+  /* Test : case dans le cadre ? */
+  if((xPoupe < 65 || xPoupe > 74) || (yPoupe < 1 || yPoupe > 10)){
+    
     printf("Coordonnées erronées.\n");
-    return -1;
+    return 1;
   }
-  printf("Vous avez entré les coordonnées %c - %d\n", x, y);
-  (int) x;
-  x -= 64;
-  *(pCoordsNavire + (y * NOMBRECOLONNES +x)) = '=';
-  //tableau[y][x] = '=';
-  taille -= 1;
+  printf("Vous avez entré les coordonnées %c - %d\n", xPoupe, yPoupe);
+  (int) xPoupe;
+  xPoupe -= 64;
+  *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '=';
+
+  /* -------------- PROUE--------------- */
+  char xProue;
+  int yProue;
+  printf("Entrez les coordonnées de la proue votre %s.\nEx : B 6 ou J7\n", typeNavire);
+  scanf(" %1c%2d", &xProue, &yProue);
+  /* Test : case hors du cadre ? */
+  if((xProue < 65 || xProue > 74) || (yProue < 1 || yProue > 10)
+     /* Test : cases en diagonale ? */
+     || (xProue != xPoupe+64 && yProue != yPoupe) /* XPoupe +64 pour comparer vals ASCII */
+     ){
+    *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on réinitialise
+    *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '~'; // on réinitialise
+    printf("Coordonnées erronées.\n");
+    return 1;
   }
+  printf("Vous avez entré les coordonnées %c - %d\n", xProue, yProue);
+  (int) xProue;
+  xProue -= 64;
+  *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '=';
+
+  /* si le bateau est horizontal, on remplit les cases entre proue et poupe */
+  if (yPoupe == yProue)
+    for(; xProue > xPoupe; xProue--)
+      *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '=';
+  /* si le bateau est vertical, on remplit les cases entre proue et poupe */
+  else
+    for(; yProue > yPoupe; yProue--)
+      *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '=';
+      
+  taille -= 1;			/* la taille servira à vérifier que le joueur dépasse pas. */
+  
   return 0;
 }
 
@@ -90,7 +122,8 @@ char * switchPlateau(void)
 void deploiementFlotte(void)
   // On code en dur l'appel de fonction pour placer chaque bateau
 {
-  placeBateau(switchPlateau(), "porte-avions", 5);
+  while (placeBateau(switchPlateau(), "porte-avions", 5))
+    ;//placeBateau(switchPlateau(), "porte-avions", 5);
   affichePlateauDeJeu(switchPlateau());
   placeBateau(switchPlateau(), "croiseur", 4);
   affichePlateauDeJeu(switchPlateau());

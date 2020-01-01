@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "plateau.h"
@@ -108,6 +109,7 @@ void afficheTableauJoueurs (void)
   menuPrincipal();
 }
 void initialisationJoueur(void)
+// crée un joueur et place sa flotte
 {
   creeJoueur();
   plateauInit(switchPlateau());
@@ -119,5 +121,5 @@ void initialisationJoueur(void)
 }
 
 int quitter(void){
-  return 0;
+  exit(1);
 }
