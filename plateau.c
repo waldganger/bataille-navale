@@ -65,7 +65,6 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
   scanf(" %1c%2d", &xPoupe, &yPoupe); // espace pour éviter un bug
   /* Test : case dans le cadre ? */
   if((xPoupe < 65 || xPoupe > 74) || (yPoupe < 1 || yPoupe > 10)){
-    
     printf("Coordonnées erronées.\n");
     return 1;
   }
@@ -82,10 +81,13 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
   /* Test : case hors du cadre ? */
   if((xProue < 65 || xProue > 74) || (yProue < 1 || yProue > 10)
      /* Test : cases en diagonale ? */
-     || (xProue != xPoupe+64 && yProue != yPoupe) /* XPoupe +64 pour comparer vals ASCII */
+     || (xProue != xPoupe + 64 && yProue != yPoupe) /* XPoupe +64 pour comparer vals ASCII */
+     /* Test : le bateau est trop grand ? */
+     || ((xProue > (xPoupe + 64) + (taille - 1)) ||
+	 (yProue > yPoupe + (taille - 1)))
      ){
-    *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on réinitialise
-    *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '~'; // on réinitialise
+    *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
+    *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '~'; // on efface la proue
     printf("Coordonnées erronées.\n");
     return 1;
   }
@@ -122,15 +124,14 @@ char * switchPlateau(void)
 void deploiementFlotte(void)
   // On code en dur l'appel de fonction pour placer chaque bateau
 {
-  while (placeBateau(switchPlateau(), "porte-avions", 5))
-    ;//placeBateau(switchPlateau(), "porte-avions", 5);
+  while (placeBateau(switchPlateau(), "porte-avions", 5));
   affichePlateauDeJeu(switchPlateau());
-  placeBateau(switchPlateau(), "croiseur", 4);
+  while (placeBateau(switchPlateau(), "croiseur", 4));
   affichePlateauDeJeu(switchPlateau());
-  placeBateau(switchPlateau(), "contre-torpilleur", 3);
+  while (placeBateau(switchPlateau(), "contre-torpilleur", 3));
   affichePlateauDeJeu(switchPlateau());
-  placeBateau(switchPlateau(), "contre-torpilleur", 3);
+  while (placeBateau(switchPlateau(), "contre-torpilleur", 3));
   affichePlateauDeJeu(switchPlateau());
-  placeBateau(switchPlateau(), "torpilleur", 2);
+  while (placeBateau(switchPlateau(), "torpilleur", 2));
   affichePlateauDeJeu(switchPlateau());
 }
