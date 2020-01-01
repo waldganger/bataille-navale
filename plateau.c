@@ -100,6 +100,31 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
   if (yPoupe == yProue)
     for(; xProue > xPoupe; xProue--)
       *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '=';
+  /* 
+Non collé à un autre bateau 
+
+Si bateau horizontal :
+rien à gauche de la poupe
+rien à droite de la proue
+rien à [-1][-1] de la poupe
+rien à [-1][+1] de la poupe
+rien à [+1][-1] de la proue
+rien à [+1][+1] de la proue
+rien en haut de chaque case
+rien en bas de chaque case
+
+Si bateau vertical :
+rien en haut de la poupe
+rien en bas de la proue
+rien à [-1][-1] de la poupe
+rien à [+1][-1] de la poupe
+rien à [-1][+1] de la proue
+rien à [+1][+1] de la proue
+rien à gauche de chaque case
+rien à droite de chaque case
+
+*/
+  
   /* si le bateau est vertical, on remplit les cases entre proue et poupe */
   else
     for(; yProue > yPoupe; yProue--)
