@@ -16,8 +16,10 @@ test range :
 ** DONE dans le cadre ? 
 ** DONE en diagonale ? 
 ** DONE taille du bateau respectée ?
-Non collé à un autre bateau ? 
+** DONE Non collé à un autre bateau ?
+** effacer les poupes et proues des routine de vérification de bateaux collés
 Ne chevauche pas un autre bateau ?
+la proue ne s'efface pas car yProue décrémente dans la boucle. A faire en partie horizontale.
 
 affiche le bateau placé
 copie des coordonnées dans array tableauJoueurs[numeroJoueur].coordPorteAvions[5][2]
