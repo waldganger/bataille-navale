@@ -102,29 +102,20 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
   if (yPoupe == yProue)
     
     {
-      /* printf("xPoupe = %d\n", xPoupe); */
-      /* printf("xProue = %d\n", xProue); */
-      /* printf("yPoupe = %d\n", xPoupe); */
-      /* printf("yProue = %d\n", yProue); */
-      /* printf("%c\n", *(pVerification + (yPoupe * NOMBRECOLONNES + xPoupe - 1))); */
-      /* printf("%c\n", *(pVerification + (yProue * NOMBRECOLONNES + xProue + 1))); */
-      /* printf("%c\n", *(pVerification + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe - 1))); */
-      /* printf("%c\n", *(pVerification + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1))); */
-      /* printf("%c\n", *(pVerification + ((yProue +1) * NOMBRECOLONNES + xProue - 1))); */
-      /* printf("%c\n", *(pVerification + ((yProue +1) * NOMBRECOLONNES + xProue + 1))); */
-      	 
-      
-/*Mais d'abord, on vérifie que le bateau n'est pas collé à un autre 
-Si bateau horizontal :
-rien à gauche de la poupe
-rien à droite de la proue
-rien à [-1][-1] de la poupe
-rien à [-1][+1] de la poupe
-rien à [+1][-1] de la proue
-rien à [+1][+1] de la proue
-rien en haut de chaque case
-rien en bas de chaque case
-*/
+      /*Mais d'abord, on vérifie que le bateau n'est pas collé à un autre 
+	Si bateau horizontal, on teste les cases suivantes en deux temps :
+
+	1. boucle if
+	rien à gauche de la poupe
+	rien à droite de la proue
+	rien à [-1][-1] de la poupe
+	rien à [-1][+1] de la poupe
+	rien à [+1][-1] de la proue
+	rien à [+1][+1] de la proue
+	2. boucle for
+	rien en haut de chaque case
+	rien en bas de chaque case
+      */
     
     if ( *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe - 1)) == '='
 	 || *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) == '='
@@ -133,9 +124,10 @@ rien en bas de chaque case
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) == '='
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '=')
       {
+	/* les bateaux se chevauchent ou sont collés : on fait un reset des coords entrées */
 	*(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
 	*(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '~'; // on efface la proue
-	printf("Les bateaux ne doivent pas être collés.\n");
+	printf("Les bateaux ne doivent pas se chevaucher, ni être collés.\n");
 	return 1;
       }
     for (; xProue > xPoupe; xProue--){
@@ -143,10 +135,11 @@ rien en bas de chaque case
       if ( *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
       	   || *(pCoordsNavire + ((yProue - 1) * NOMBRECOLONNES + xProue)) == '=')
       	{
+	  /* les bateaux se chevauchent ou sont collés : on fait un reset des coords entrées */
 	  *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe)) = '~'; // on efface la poupe
 	  //la proue ne s'efface pas car xProue décrémente dans la boucle.
 	  *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) = '~'; // on efface la proue
-      	  printf("Les bateaux ne doivent pas être collés.\n");
+      	  printf("Les bateaux ne doivent pas se chevaucher, ni être collés.\n");
       	  return 1;
       	}
 	
@@ -154,27 +147,22 @@ rien en bas de chaque case
     }
     
     }
-  /* 
-Si bateau vertical :
-
-
-*/
   
-  /* si le bateau est vertical, on vérifie que les cases adjacentes sont libres.
-     rien en haut de la poupe
-rien en bas de la proue
-rien à [-1][-1] de la poupe
-rien à [+1][-1] de la poupe
-rien à [-1][+1] de la proue
-rien à [+1][+1] de la proue
-rien à gauche de chaque case
-rien à droite de chaque case
-
-*/
-
-  
+  /* le bateau n'est pas horizontal, il est donc vertical #genius */
   else
     {
+      /* On vérifie que les cases adjacentes sont libres en 2 temps : 
+	 1. boucle if
+	 rien en haut de la poupe
+	 rien en bas de la proue
+	 rien à [-1][-1] de la poupe
+	 rien à [+1][-1] de la poupe
+	 rien à [-1][+1] de la proue
+	 rien à [+1][+1] de la proue
+	 2. Boucle for
+	 rien à gauche de chaque case
+	 rien à droite de chaque case */
+      
     if ( *(pCoordsNavire + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe)) == '='
 	 || *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
 	 || *(pCoordsNavire + ((yPoupe -1) * NOMBRECOLONNES + xPoupe - 1)) == '='
@@ -182,16 +170,11 @@ rien à droite de chaque case
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) == '='
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '=')
       {
-	/* *(pCoordsNavire + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe)) = '~'; */
-	/* *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) = '~'; */
-	/* *(pCoordsNavire + ((yPoupe -1) * NOMBRECOLONNES + xPoupe - 1)) = '~'; */
-	/* *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1)) = '~'; */
-	/* *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) = '~'; */
-	/* *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) = '~'; */
+	/* les bateaux se chevauchent ou sont collés : on fait un reset des coords entrées */
 	*(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
 	*(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '~'; // on efface la proue
 	
-	printf("Les bateaux ne doivent pas être collés.\n");
+	printf("Les bateaux ne doivent pas se chevaucher, ni être collés.\n");
 	return 1;
       }
     
@@ -200,14 +183,12 @@ rien à droite de chaque case
       if ( *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue - 1)) == '='
       	   || *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) == '=')
       	{
-	  /* *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue - 1)) = '~'; */
-      	  /* *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) = '~'; */
-
+	  /* les bateaux se chevauchent ou sont collés : on fait un reset des coords entrées */
 	  *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
 	  //la proue ne s'efface pas car yProue décrémente dans la boucle.
 	  *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES +xProue)) = '~'; // on efface la proue
 	  
-      	  printf("Les bateaux ne doivent pas être collés.\n");
+      	  printf("Les bateaux ne doivent pas se chevaucher, ni être collés.\n");
       	  return 1;
       	}
       /* on remplit les cases entre proue et poupe  */
@@ -215,10 +196,8 @@ rien à droite de chaque case
     }
 
     }
-  
-  taille -= 1;			/* la taille servira à vérifier que le joueur dépasse pas. */
-  
-  return 0;
+  /* retour 0 sert à sortir des boucles dans fonction deploiementFlotte */
+  return 0; 			
 }
 
 char * switchPlateau(void)
