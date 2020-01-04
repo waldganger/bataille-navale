@@ -3,6 +3,7 @@ PA = 2 colonnes. int coordPorteAvions[5][2]
 
 * menu principal
 ** fusionner menus 1 et 4
+** initialiser les tableaux de coordonnées des bateaux de chaque joueurs.
 
 * placer les bateaux
 ** DONE tant qu'il y a un bateau
@@ -17,11 +18,11 @@ test range :
 ** DONE en diagonale ? 
 ** DONE taille du bateau respectée ?
 ** DONE Non collé à un autre bateau ?
-** effacer les poupes et proues des routine de vérification de bateaux collés
-Ne chevauche pas un autre bateau ?
-la proue ne s'efface pas car yProue décrémente dans la boucle. A faire en partie horizontale.
+** DONE effacer les poupes et proues des routine de vérification de bateaux collés
+** DONE Ne chevauche pas un autre bateau ?
+** DONE la proue ne s'efface pas car yProue décrémente dans la boucle. A faire en partie horizontale.
 
-affiche le bateau placé
+** DONE affiche le bateau placé
 copie des coordonnées dans array tableauJoueurs[numeroJoueur].coordPorteAvions[5][2]
 tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 {65 , 2}
@@ -32,6 +33,7 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 }
 /while
 
+** TODO switchPlateau : la numerotation des joueurs commence à 0 (même si à l'affichage, c'est 1 et 2)
 * tir
 joueur 1 voit plateau "masque" qui ne contient que des tildes
 tire [y][x] (reprendre placeBateau)

@@ -33,6 +33,7 @@ void plateauInit(char *ptableau);
 void affichePlateauDeJeu(char *ptableau);
 void plateauIndices(char *ptableau);
 int placeBateau(char *ptableau, char typeNavire[], int taille);
+void memCoordonnees(int numeroJoueur, int Xpoupe, int yPoupe, int vertical, int taille);
 char * switchPlateau(void);
 
 

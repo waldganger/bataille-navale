@@ -79,11 +79,33 @@ void creeJoueur(void)
   tableauJoueurs[numeroJoueur].contreTorpilleur = 3;
   tableauJoueurs[numeroJoueur].contreTorpilleur2 = 3;
   tableauJoueurs[numeroJoueur].torpilleur = 2;
+
+  /* initialisation des tableaux de coordonnées des bateaux. */
+  int i, j;
+  for (i = 0; i < tableauJoueurs[numeroJoueur].porteAvions; i++)
+    for (j = 0; j < 2; j++)
+      tableauJoueurs[numeroJoueur].coordPorteAvions[i][j] = 0;
+
+  for (i = 0; i < tableauJoueurs[numeroJoueur].croiseur; i++)
+    for (j = 0; j < 2; j++)
+      tableauJoueurs[numeroJoueur].coordCroiseur[i][j] = 0;
+
+  for (i = 0; i < tableauJoueurs[numeroJoueur].contreTorpilleur; i++)
+    for (j = 0; j < 2; j++)
+      tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][j] = 0;
+      
+  for (i = 0; i < tableauJoueurs[numeroJoueur].contreTorpilleur2; i++)
+    for (j = 0; j < 2; j++)
+      tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][j] = 0;
+
+  for (i = 0; i < tableauJoueurs[numeroJoueur].torpilleur; i++)
+    for (j = 0; j < 2; j++)
+      tableauJoueurs[numeroJoueur].coordTorpilleur[i][j] = 0;
   
   printf("La fiche a bien été créée.\n\n");
   afficheFicheJoueur(numeroJoueur);
   numeroJoueur++;
-  //menuPrincipal();
+  
 }
 
 void afficheFicheJoueur(int numeroJoueur)
