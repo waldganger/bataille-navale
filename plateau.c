@@ -131,6 +131,12 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 	printf("Les bateaux ne doivent pas se chevaucher, ni être collés.\n");
 	return 1;
       }
+
+    /* Copie coordonnées validées pour les passer à la fonction memCoordonnées */
+    
+    int copieyPoupe = yPoupe;
+    int copiexPoupe = xPoupe;
+    
     for (; xProue > xPoupe; xProue--){
       
       if ( *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
@@ -146,7 +152,7 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 	
       *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue)) = '=';
     }
-    
+    memCoordonnees(numeroJoueur, copiexPoupe, copieyPoupe, vertical, taille);
     }
   
   /* le bateau n'est pas horizontal, il est donc vertical #genius */
@@ -180,7 +186,7 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 	printf("Les bateaux ne doivent pas se chevaucher, ni être collés.\n");
 	return 1;
       }
-    /* Préparation copie coordonnées pour les passer à la fonction memCoordonnées */
+    /* Copie coordonnées validées pour les passer à la fonction memCoordonnées */
     
     int copieyPoupe = yPoupe;
     int copiexPoupe = xPoupe;
@@ -305,8 +311,91 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
       }
     
 
-  else				/* on itère les xPoupe */
-    ;
+  else				/* Le bateau est horizontal, on itère les xPoupe */
+    {
+      
+      switch (taille)		/* quel type de bateau est-ce ? */
+      {
+
+      case 5:			/* c'est le porte-avion */
+	
+	for (i = 0; i < taille; i++)	
+	  tableauJoueurs[numeroJoueur].coordPorteAvions[i][0] = yPoupe;
+	for (i = 0; i < taille; i++, xPoupe++)
+	  tableauJoueurs[numeroJoueur].coordPorteAvions[i][1] = xPoupe;
+	
+	for (i = 0; i < taille; i++)
+	  for (j= 0; j < 2; j++)
+	    printf(" %d ", tableauJoueurs[numeroJoueur].coordPorteAvions[i][j]);
+	printf("\n");
+       	break;
+	
+      case 4:
+	for (i = 0; i < taille; i++)	
+	  tableauJoueurs[numeroJoueur].coordCroiseur[i][0] = yPoupe;
+	for (i = 0; i < taille; i++, xPoupe++)
+	  tableauJoueurs[numeroJoueur].coordCroiseur[i][1] = xPoupe;
+	
+	for (i = 0; i < taille; i++)
+	  for (j= 0; j < 2; j++)
+	    printf(" %d ", tableauJoueurs[numeroJoueur].coordCroiseur[i][j]);
+	printf("\n");
+       	break;
+
+      case 3:
+	/* Les deux contre-torpilleurs ont une taille de 3.
+	 Pour savoir quel tableau remplir, on teste si le premier est vide.
+	S'il est plein, on remplit le 2nd.
+	Sinon, on remplit le premier. */
+	
+	if (tableauJoueurs[numeroJoueur].coordContreTorpilleur[0][0])
+	  {
+	    for (i = 0; i < taille; i++)	
+	      tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][0] = yPoupe;
+	    for (i = 0; i < taille; i++, xPoupe++)
+	      tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][1] = xPoupe;
+	
+	    for (i = 0; i < taille; i++)
+	      for (j= 0; j < 2; j++)
+		printf(" %d ", tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][j]);
+	    printf("\n");
+	    break;
+	  }
+
+	else
+	  {
+	    for (i = 0; i < taille; i++)	
+	      tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][0] = yPoupe;
+	    for (i = 0; i < taille; i++, xPoupe++)
+	      tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][1] = xPoupe;
+	
+	    for (i = 0; i < taille; i++)
+	      for (j= 0; j < 2; j++)
+		printf(" %d ", tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][j]);
+	    printf("\n");
+	    break;
+	  }
+
+      case 2:
+	  for (i = 0; i < taille; i++)	
+	      tableauJoueurs[numeroJoueur].coordTorpilleur[i][0] = yPoupe;
+	  for (i = 0; i < taille; i++, xPoupe++)
+	      tableauJoueurs[numeroJoueur].coordTorpilleur[i][1] = xPoupe;
+	
+	    for (i = 0; i < taille; i++)
+	      for (j= 0; j < 2; j++)
+		printf(" %d ", tableauJoueurs[numeroJoueur].coordTorpilleur[i][j]);
+	    printf("\n");
+	    break;
+		
+	default:
+	  break;
+      }
+
+      
+    }
+
+    
   
 }
 
