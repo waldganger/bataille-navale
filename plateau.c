@@ -499,7 +499,7 @@ void tir(char *pointeurVersBonPlateauMasque)
   int yTir;
   char *pCoordonneesTir = pointeurVersBonPlateauMasque;
   int controle = 1;
-  int i, j;
+  int i;
   
 
   /* Le joueur entre ses coordonnées de tir */
@@ -521,26 +521,16 @@ void tir(char *pointeurVersBonPlateauMasque)
   printf("Coordonnées entrées : %d, %d\n", yTir, xTir);
   int coordonneesTir[2] = {yTir, xTir};
 
-  //for (i = 0 ; i < 5; i++)
     
-  
   /* si joueur 1, on lie le tir à son vrai plateau de jeu pour vérifier si le tir réussit */
   /* on vérifie le numéro du joueur */
   if (pCoordonneesTir == &masquePlateauDeJeu1[0][0]){
-    //printf("Condition remplie.\n");
+    
     printf("%d %d", coordonneesTir[0], coordonneesTir[1]);
     for (i = 0; i < 5 ; i++)
       if (coordonneesTir[0] == tableauJoueurs[1].coordPorteAvions[i][0] &&
 	coordonneesTir[1] == tableauJoueurs[1].coordPorteAvions[i][1])
-	//for (j = 0; j < 2; j++)
-	
-	if (coordonneesTir[0] == tableauJoueurs[1].coordPorteAvions[i][0] &&
-	    coordonneesTir[1] == tableauJoueurs[1].coordPorteAvions[i][1])
-	{
-	  printf("Row %d, column %d : Touché !\n", coordonneesTir[0], coordonneesTir[1]);
-	  printf("Row %d, column %d : Touché !\n", tableauJoueurs[1].coordPorteAvions[i][0], tableauJoueurs[1].coordPorteAvions[i][1]);
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
-	}
   }
   else
     printf("Condition non remplie.\n");
