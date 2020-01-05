@@ -9,6 +9,8 @@
 
 
 extern int numeroJoueur ;
+extern int tour ;
+int tour = 1;
 int numeroJoueur = 0;
 
 
@@ -35,7 +37,8 @@ void menuPrincipal(void)
   printf("2. Afficher la fiche d'un joueur ?\n");
   printf("3. Voir la liste des joueurs ?\n");
   printf("4. Placer vos bateaux ?\n");
-  printf("5. Quitter.\n");
+  printf("5. Démarrer une partie.\n");
+  printf("6. Quitter.\n");
   scanf("%d", &choixMenuPrincipal);
   
   if(choixMenuPrincipal == 1){
@@ -53,8 +56,11 @@ void menuPrincipal(void)
   else if (choixMenuPrincipal == 4){
     
   }
-    
+
   else if (choixMenuPrincipal == 5)
+    partie();
+  
+  else if (choixMenuPrincipal == 6)
     quitter();
   else{
     printf("\nMauvaise entrée. Veuillez VOUS REPRENDRE.\n");

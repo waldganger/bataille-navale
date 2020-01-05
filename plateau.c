@@ -8,13 +8,16 @@
 char plateauDeJeu1[NOMBRELIGNES][NOMBRECOLONNES];
 char plateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
 
+char masquePlateauDeJeu1[NOMBRELIGNES][NOMBRECOLONNES];
+char masquePlateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
+
 int numeroJoueur;
 joueur tableauJoueurs[];
 
 void plateauInit(char *ptableau)
 {
   int i, j;
-  //char *ptableau = &(*tableau)[0][0];
+  
   for(i = 0; i < NOMBRELIGNES; i++)
     for(j = 0; j < NOMBRECOLONNES; j++)
       *(ptableau + i * NOMBRECOLONNES + j) = '~';
@@ -424,4 +427,130 @@ void deploiementFlotte(void)
   affichePlateauDeJeu(switchPlateau());
   while (placeBateau(switchPlateau(), "torpilleur", 2));
   affichePlateauDeJeu(switchPlateau());
+}
+
+
+void plateauxMasquesinit(void)
+{
+  int i, j;
+  char *ptableaumasque1 = &masquePlateauDeJeu1[0][0];
+  char *ptableaumasque2 = &masquePlateauDeJeu2[0][0];
+  
+  for(i = 0; i < NOMBRELIGNES; i++)
+    for(j = 0; j < NOMBRECOLONNES; j++)
+      {
+      *(ptableaumasque1 + i * NOMBRECOLONNES + j) = '~';
+      *(ptableaumasque2 + i * NOMBRECOLONNES + j) = '~';
+      }
+}
+
+char * afficheMasquePlateauDeJeu(int tour)
+{
+  int i, j;
+  char *pointeurmasque = NULL;
+  char *pAbcisses = NULL;
+  char *pOrdonnees = NULL;
+  
+  if(tour % 2) 		/* joueur 1 si tour impair */
+    {
+    pointeurmasque = pAbcisses = pOrdonnees = &masquePlateauDeJeu1[0][0];
+    printf("*** Tour n° %d. A %s de tirer !\n", tour, tableauJoueurs[0].nom);
+    }
+  else
+    {
+    pointeurmasque = pAbcisses = pOrdonnees = &masquePlateauDeJeu2[0][0];
+    printf("*** Tour n° %d. A %s de tirer !\n", tour, tableauJoueurs[1].nom);
+    }
+
+/* --- affichage des indices --- */
+     pAbcisses++;			/* On décale le pointeur d'une colonne. */
+  /* abcisses, de A à J */
+  for (i = 0; i < NOMBRECOLONNES - 1; i++){
+    *(pAbcisses + i) = 65 + i;
+  }
+  //ordonnées, char de 1 à 9
+  for(i = 1, j = 0; i < NOMBRECOLONNES - 1; i++){
+    *(pOrdonnees + (i * NOMBRECOLONNES + j)) = 48 + i ; // i = 1, donc on démarre à 48 au lieu de 49;
+  }
+  //10 != ASCII, alors on place un nombre en le castant en int.
+  *(pOrdonnees + (i++ * NOMBRECOLONNES + j)) = (int) 10;
+
+
+  
+  for(i = 0; i < NOMBRELIGNES; i++){
+    for(j = 0; j < NOMBRECOLONNES ; j++)
+      {
+      if (i == 10 && j == 0)
+	printf("[%d ]", *(pointeurmasque +i * NOMBRECOLONNES + j));
+      else
+	printf("[%2c ]", *(pointeurmasque + i * NOMBRECOLONNES + j));
+      }
+    printf("\n");
+  }
+
+  
+  
+  return pointeurmasque;
+}
+
+void tir(char *pointeurVersBonPlateauMasque)
+{
+  char xTir;
+  int yTir;
+  char *pCoordonneesTir = pointeurVersBonPlateauMasque;
+  int controle = 1;
+  int i, j;
+  
+
+  /* Le joueur entre ses coordonnées de tir */
+  while(controle)
+    {
+  printf("Entrez les coordonnées de tir.\n Ex : B 6 ou J7\n");
+  scanf(" %1c%2d", &xTir, &yTir); // espace pour éviter un bug
+  /* Test : case dans le cadre ? */
+  if((xTir < 65 || xTir > 74) || (yTir < 1 || yTir > 10))
+    printf("Coordonnées erronées.\n");
+  else
+    controle = 0;
+    }
+  
+  printf("TIR en %c - %d\n", xTir, yTir);
+  (int) xTir;
+  xTir -= 64;
+
+  printf("Coordonnées entrées : %d, %d\n", yTir, xTir);
+  int coordonneesTir[2] = {yTir, xTir};
+
+  //for (i = 0 ; i < 5; i++)
+    
+  
+  /* si joueur 1, on lie le tir à son vrai plateau de jeu pour vérifier si le tir réussit */
+  /* on vérifie le numéro du joueur */
+  if (pCoordonneesTir == &masquePlateauDeJeu1[0][0]){
+    //printf("Condition remplie.\n");
+    printf("%d %d", coordonneesTir[0], coordonneesTir[1]);
+    for (i = 0; i < 5 ; i++)
+      if (coordonneesTir[0] == tableauJoueurs[1].coordPorteAvions[i][0] &&
+	coordonneesTir[1] == tableauJoueurs[1].coordPorteAvions[i][1])
+	//for (j = 0; j < 2; j++)
+	
+	if (coordonneesTir[0] == tableauJoueurs[1].coordPorteAvions[i][0] &&
+	    coordonneesTir[1] == tableauJoueurs[1].coordPorteAvions[i][1])
+	{
+	  printf("Row %d, column %d : Touché !\n", coordonneesTir[0], coordonneesTir[1]);
+	  printf("Row %d, column %d : Touché !\n", tableauJoueurs[1].coordPorteAvions[i][0], tableauJoueurs[1].coordPorteAvions[i][1]);
+	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
+	}
+  }
+  else
+    printf("Condition non remplie.\n");
+}
+
+void partie(void)
+{
+  plateauxMasquesinit();
+  while(1)
+    tir(afficheMasquePlateauDeJeu(tour));
+  
+  
 }
