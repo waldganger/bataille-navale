@@ -522,14 +522,16 @@ void tir(char *pointeurVersBonPlateauMasque)
   int coordonneesTir[2] = {yTir, xTir};
 
     
-  /* si joueur 1, on lie le tir à son vrai plateau de jeu pour vérifier si le tir réussit */
+  /* si joueur 1, on lie le tir au plateau de jeu du J2 pour vérifier si le tir réussit */
   /* on vérifie le numéro du joueur */
   if (pCoordonneesTir == &masquePlateauDeJeu1[0][0]){
-    
-    printf("%d %d", coordonneesTir[0], coordonneesTir[1]);
+    /* Faire un switch modifier le numéro de joueur avec une variable */
     for (i = 0; i < 5 ; i++)
       if (coordonneesTir[0] == tableauJoueurs[1].coordPorteAvions[i][0] &&
 	coordonneesTir[1] == tableauJoueurs[1].coordPorteAvions[i][1])
+	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
+      else if (coordonneesTir[0] == tableauJoueurs[1].coordCroiseur[i][0] &&
+	coordonneesTir[1] == tableauJoueurs[1].coordCroiseur[i][1])
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
   }
   else
