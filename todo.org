@@ -24,18 +24,17 @@ test range :
 
 ** DONE affiche le bateau placé
 copie des coordonnées dans array tableauJoueurs[numeroJoueur].coordPorteAvions[5][2]
-tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
-{65 , 2}
-{66 , 2}
-{67 , 2}
-{68 , 2}
-{69 , 2}
-}
+tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = 
+{{1, 1},
+{1, 2},
+{1, 3},
+{1, 4},
+{1, 5}}
 /while
 
-** TODO switchPlateau : la numerotation des joueurs commence à 0 (même si à l'affichage, c'est 1 et 2)
+** DONE switchPlateau : la numerotation des joueurs commence à 0 (même si à l'affichage, c'est 1 et 2) // annulé : quand switchPlateau() est invoquée, numeroJoueur a déjà été incrémenté.
 * tir
-joueur 1 voit plateau "masque" qui ne contient que des tildes
+joueur 1 voit son plateau "masque" lié au plateau du joueur 2 (pm1 --> pj2)
 tire [y][x] (reprendre placeBateau)
 loop dans tous les arrays contenant les coordonnées des bateaux
 si match
@@ -44,3 +43,6 @@ La case correspondante du plateau masque = la case du plateau maitre.
 retranche 1 point de vie au bateau concerné
 sinon
 affiche O dans le plateau masque du joueur
+loop - paramètres : numero joueur, son plateau masque.
+
+** TODO A faire : tir au meme endroit : si l'endroit est déjà marqué d'un X, message d'erreur.

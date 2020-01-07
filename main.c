@@ -4,8 +4,7 @@
 
 #include "plateau.h"
 
-#define TAILLE_MAX_TABLEAU 256
-
+#define TAILLE_MAX_TABLEAU 2	/* nombre de joueurs max */
 
 
 extern int numeroJoueur ;
@@ -79,6 +78,7 @@ void creeJoueur(void)
   char inputNom[256];
   printf("Entrez un nom de joueur.\n");
   scanf("%s", inputNom);
+  
   strcpy(tableauJoueurs[numeroJoueur].nom, inputNom);
   tableauJoueurs[numeroJoueur].porteAvions = 5;
   tableauJoueurs[numeroJoueur].croiseur = 4;

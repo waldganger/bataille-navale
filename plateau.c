@@ -498,44 +498,99 @@ void tir(char *pointeurVersBonPlateauMasque)
   char xTir;
   int yTir;
   char *pCoordonneesTir = pointeurVersBonPlateauMasque;
-  int controle = 1;
+  int controleCoordonneesTir = 1;
+  int indiceTableauJoueurs;
   int i;
-  
-
+ 
   /* Le joueur entre ses coordonnées de tir */
-  while(controle)
+  while(controleCoordonneesTir)
     {
   printf("Entrez les coordonnées de tir.\n Ex : B 6 ou J7\n");
   scanf(" %1c%2d", &xTir, &yTir); // espace pour éviter un bug
   /* Test : case dans le cadre ? */
   if((xTir < 65 || xTir > 74) || (yTir < 1 || yTir > 10))
     printf("Coordonnées erronées.\n");
+  /* Test : 2ème tir au même endroit ? */
+  else if (*(pCoordonneesTir + (yTir * NOMBRECOLONNES + (xTir - 64))) == 'X')
+    printf("Vous avez déjà diré à cet endroit.\n");
   else
-    controle = 0;
+    controleCoordonneesTir = 0;
     }
   
   printf("TIR en %c - %d\n", xTir, yTir);
-  (int) xTir;
   xTir -= 64;
 
   printf("Coordonnées entrées : %d, %d\n", yTir, xTir);
   int coordonneesTir[2] = {yTir, xTir};
 
+  /* on vérifie le numéro du joueur */
+  indiceTableauJoueurs = (pCoordonneesTir == &masquePlateauDeJeu1[0][0]) ? 1 : 2;
+  
     
   /* si joueur 1, on lie le tir au plateau de jeu du J2 pour vérifier si le tir réussit */
-  /* on vérifie le numéro du joueur */
-  if (pCoordonneesTir == &masquePlateauDeJeu1[0][0]){
-    /* Faire un switch modifier le numéro de joueur avec une variable */
+  
+  //if (pCoordonneesTir == &masquePlateauDeJeu1[0][0]){
+    /* Cinq boucles de tailles différentes pour comparer coords tir et coords de chaque navire */
+  /* Porte-avions */
     for (i = 0; i < 5 ; i++)
-      if (coordonneesTir[0] == tableauJoueurs[1].coordPorteAvions[i][0] &&
-	coordonneesTir[1] == tableauJoueurs[1].coordPorteAvions[i][1])
+      if (coordonneesTir[0] == tableauJoueurs[indiceTableauJoueurs].coordPorteAvions[i][0] &&
+	coordonneesTir[1] == tableauJoueurs[indiceTableauJoueurs].coordPorteAvions[i][1])
+	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
-      else if (coordonneesTir[0] == tableauJoueurs[1].coordCroiseur[i][0] &&
-	coordonneesTir[1] == tableauJoueurs[1].coordCroiseur[i][1])
+	if (--(tableauJoueurs[indiceTableauJoueurs].porteAvions))
+	printf("Porte-avions touché %d/5!\n", tableauJoueurs[indiceTableauJoueurs].porteAvions);
+	else
+	  printf("Porte-avions coulé !\n");
+	}
+	
+    /* Croiseur */
+    for (i = 0; i < 4 ; i++)
+      if (coordonneesTir[0] == tableauJoueurs[indiceTableauJoueurs].coordCroiseur[i][0] &&
+	coordonneesTir[1] == tableauJoueurs[indiceTableauJoueurs].coordCroiseur[i][1])
+	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
-  }
-  else
-    printf("Condition non remplie.\n");
+	if (--(tableauJoueurs[indiceTableauJoueurs].croiseur))
+	printf("Croiseur touché %d/4!\n", tableauJoueurs[indiceTableauJoueurs].croiseur);
+	else
+	  printf("Croiseur coulé !\n");
+	}
+
+    /* Contre-torpilleur 1 */
+    for (i = 0; i < 3 ; i++)
+      if (coordonneesTir[0] == tableauJoueurs[indiceTableauJoueurs].coordContreTorpilleur[i][0] &&
+	coordonneesTir[1] == tableauJoueurs[indiceTableauJoueurs].coordContreTorpilleur[i][1])
+	{
+	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
+	if (--(tableauJoueurs[indiceTableauJoueurs].contreTorpilleur))
+	printf("Contre-torpilleur No 1 touché %d/3!\n", tableauJoueurs[indiceTableauJoueurs].contreTorpilleur);
+	else
+	  printf("Contre torpilleur No 1 coulé !\n");
+	}
+    
+    /* Contre-torpilleur 2 */
+    for (i = 0; i < 3 ; i++)
+      if (coordonneesTir[0] == tableauJoueurs[indiceTableauJoueurs].coordContreTorpilleur2[i][0] &&
+	coordonneesTir[1] == tableauJoueurs[indiceTableauJoueurs].coordContreTorpilleur2[i][1])
+	{
+	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
+	if (--(tableauJoueurs[indiceTableauJoueurs].contreTorpilleur2))
+	printf("Contre-torpilleur No 2 touché %d/3!\n", tableauJoueurs[indiceTableauJoueurs].contreTorpilleur2);
+	else
+	  printf("Contre torpilleur No 2 coulé !\n");
+	}
+	
+    /* Torpilleur */
+    for (i = 0; i < 2 ; i++)
+      if (coordonneesTir[0] == tableauJoueurs[indiceTableauJoueurs].coordTorpilleur[i][0] &&
+	coordonneesTir[1] == tableauJoueurs[indiceTableauJoueurs].coordTorpilleur[i][1])
+	{
+	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
+	if (--(tableauJoueurs[indiceTableauJoueurs].torpilleur))
+	printf("Torpilleur touché %d/2!\n", tableauJoueurs[indiceTableauJoueurs].torpilleur);
+	else
+	  printf("Torpilleur coulé !\n");
+	}
+    tour++;
 }
 
 void partie(void)
