@@ -9,8 +9,8 @@
 extern char plateauDeJeu1[NOMBRELIGNES][NOMBRECOLONNES];
 extern char plateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
 
-extern char masquePlateauDeJeu1[NOMBRELIGNES][NOMBRECOLONNES];
-extern char masquePlateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
+char masquePlateauDeJeu1[NOMBRELIGNES][NOMBRECOLONNES];
+char masquePlateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
 
 extern int tour;
 
@@ -19,11 +19,11 @@ extern int tour;
 typedef struct joueur
 {
   signed char nom[256];
-  unsigned char porteAvions;
-  unsigned char croiseur;
-  unsigned char contreTorpilleur;
-  unsigned char contreTorpilleur2;
-  unsigned char torpilleur;
+  int porteAvions;
+  int croiseur;
+  int contreTorpilleur;
+  int contreTorpilleur2;
+  int torpilleur;
   
   int coordPorteAvions[5][2];
   int coordCroiseur[4][2];
@@ -45,10 +45,12 @@ void deploiementFlotte(void);
 
 void partie(void);
 void plateauxMasquesinit(void);
-char * afficheMasquePlateauDeJeu(int tour);
-//char * afficheIndices(char *pointeurVersBonPlateauMasque);
-void tir(char *pointeurVersBonPlateauMasque);
 
+
+char * afficheMasquePlateauDeJeu(int tour);
+
+int tir(char *pointeurVersBonPlateauMasque); //retourne l'indice du tableau de joueur
+int victoire(int indiceTableauJoueurs);
 
 
 #endif

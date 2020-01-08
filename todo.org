@@ -46,3 +46,4 @@ affiche O dans le plateau masque du joueur
 loop - paramètres : numero joueur, son plateau masque.
 
 ** TODO A faire : tir au meme endroit : si l'endroit est déjà marqué d'un X, message d'erreur.
+Les points de vie du bateau sont à 0 et non à 5 !

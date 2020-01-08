@@ -233,6 +233,7 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
  */
   
 {
+  numeroJoueur--;		/* creeJoueur a déjà incrémenté de 1, on recule */
   int i, j;
   if(vertical)			/* on itère les Ypoupe, les xPoupes restent fixes */
     switch (taille)		/* quel type de bateau est-ce ? */
@@ -493,15 +494,15 @@ char * afficheMasquePlateauDeJeu(int tour)
   return pointeurmasque;
 }
 
-void tir(char *pointeurVersBonPlateauMasque)
+int tir(char *pointeurVersBonPlateauMasque)
 {
   char xTir;
   int yTir;
   char *pCoordonneesTir = pointeurVersBonPlateauMasque;
   int controleCoordonneesTir = 1;
-  int indiceTableauJoueurs;
+  int indiceTableauJoueurs = 1;
   int i;
- 
+ printf("Porte-avions debug %d/5!\n", tableauJoueurs[indiceTableauJoueurs].porteAvions);
   /* Le joueur entre ses coordonnées de tir */
   while(controleCoordonneesTir)
     {
@@ -518,16 +519,27 @@ void tir(char *pointeurVersBonPlateauMasque)
     }
   
   printf("TIR en %c - %d\n", xTir, yTir);
+  
+  (int) xTir;
   xTir -= 64;
 
   printf("Coordonnées entrées : %d, %d\n", yTir, xTir);
   int coordonneesTir[2] = {yTir, xTir};
 
   /* on vérifie le numéro du joueur */
-  indiceTableauJoueurs = (pCoordonneesTir == &masquePlateauDeJeu1[0][0]) ? 1 : 2;
-  
+  //indiceTableauJoueurs = (pCoordonneesTir == &masquePlateauDeJeu1[0][0]) ? 2 : 1;
+  if (pCoordonneesTir == &masquePlateauDeJeu1[0][0]){
+    indiceTableauJoueurs = 1; //le joueur 1 un vise le plateau du joueur 2
+    printf("masque 1, joueur 2\n");
+  }
+  else if (pCoordonneesTir == &masquePlateauDeJeu2[0][0]){
+    printf("masque 1, joueur 2\n");
+    indiceTableauJoueurs = 0; ////le joueur 2 un vise le plateau du joueur 1
     
-  /* si joueur 1, on lie le tir au plateau de jeu du J2 pour vérifier si le tir réussit */
+  }
+  else
+    printf("Bug, le pointeur n'est pas reconnu.\n");
+  /* si joueur 1 avec masque de jeu 1, on lie le tir au plateau de jeu du J2 pour vérifier si le tir réussit */
   
   //if (pCoordonneesTir == &masquePlateauDeJeu1[0][0]){
     /* Cinq boucles de tailles différentes pour comparer coords tir et coords de chaque navire */
@@ -538,9 +550,11 @@ void tir(char *pointeurVersBonPlateauMasque)
 	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
 	if (--(tableauJoueurs[indiceTableauJoueurs].porteAvions))
-	printf("Porte-avions touché %d/5!\n", tableauJoueurs[indiceTableauJoueurs].porteAvions);
+	  printf("Porte-avions touché %d/5!\n", tableauJoueurs[indiceTableauJoueurs].porteAvions);
 	else
 	  printf("Porte-avions coulé !\n");
+	tour++;
+	return indiceTableauJoueurs;
 	}
 	
     /* Croiseur */
@@ -553,6 +567,8 @@ void tir(char *pointeurVersBonPlateauMasque)
 	printf("Croiseur touché %d/4!\n", tableauJoueurs[indiceTableauJoueurs].croiseur);
 	else
 	  printf("Croiseur coulé !\n");
+	tour++;
+	return indiceTableauJoueurs;
 	}
 
     /* Contre-torpilleur 1 */
@@ -563,8 +579,11 @@ void tir(char *pointeurVersBonPlateauMasque)
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
 	if (--(tableauJoueurs[indiceTableauJoueurs].contreTorpilleur))
 	printf("Contre-torpilleur No 1 touché %d/3!\n", tableauJoueurs[indiceTableauJoueurs].contreTorpilleur);
+	
 	else
 	  printf("Contre torpilleur No 1 coulé !\n");
+	tour++;
+	return indiceTableauJoueurs;
 	}
     
     /* Contre-torpilleur 2 */
@@ -577,6 +596,8 @@ void tir(char *pointeurVersBonPlateauMasque)
 	printf("Contre-torpilleur No 2 touché %d/3!\n", tableauJoueurs[indiceTableauJoueurs].contreTorpilleur2);
 	else
 	  printf("Contre torpilleur No 2 coulé !\n");
+	tour++;
+	return indiceTableauJoueurs;
 	}
 	
     /* Torpilleur */
@@ -589,15 +610,51 @@ void tir(char *pointeurVersBonPlateauMasque)
 	printf("Torpilleur touché %d/2!\n", tableauJoueurs[indiceTableauJoueurs].torpilleur);
 	else
 	  printf("Torpilleur coulé !\n");
+	tour++;
+	return indiceTableauJoueurs;
 	}
     tour++;
+    return indiceTableauJoueurs;
+}
+
+
+
+int victoire(int indiceTableauJoueurs)
+/* détecte la vitoire et retourne le signal de fin de partie 
+   0 : continue
+   1 : joueur 1 gagne
+   2 : joueur 2 gagne
+*/
+
+{
+  //indiceTableauJoueurs--;	/* annule le décalage entre indices masques et No joueurs */
+  
+  if (tableauJoueurs[indiceTableauJoueurs].porteAvions +
+      tableauJoueurs[indiceTableauJoueurs].croiseur +
+      tableauJoueurs[indiceTableauJoueurs].contreTorpilleur +
+      tableauJoueurs[indiceTableauJoueurs].contreTorpilleur2 +
+      tableauJoueurs[indiceTableauJoueurs].torpilleur)
+    return 0;			/* pas de victoire */
+  
+  else
+    return indiceTableauJoueurs + 1;
 }
 
 void partie(void)
 {
   plateauxMasquesinit();
+ 
+    
   while(1)
-    tir(afficheMasquePlateauDeJeu(tour));
-  
+    //tir(afficheMasquePlateauDeJeu(tour));
+    {
+    if (victoire(tir(afficheMasquePlateauDeJeu(tour))) == 1 )
+      printf("%s a gagné la partie. La flotte de %s est entièrement détruite.\n",
+  	     tableauJoueurs[0].nom, tableauJoueurs[1].nom);
+    else if (victoire(tir(afficheMasquePlateauDeJeu(tour))) == 2 )
+      printf("%s a gagné la partie. La flotte de %s est entièrement détruite.\n",
+  	     tableauJoueurs[1].nom, tableauJoueurs[0].nom);
+  }
+  printf("Fin de la partie.\n");
   
 }
