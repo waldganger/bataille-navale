@@ -46,4 +46,9 @@ affiche O dans le plateau masque du joueur
 loop - paramètres : numero joueur, son plateau masque.
 
 ** TODO A faire : tir au meme endroit : si l'endroit est déjà marqué d'un X, message d'erreur.
-Les points de vie du bateau sont à 0 et non à 5 !
+** DONE le décompte des points doit se faire de 0 à nombre de points de vie
+** TODO affichage du masque avec le tir du joueur avant de changer de tour
+** TODO afficher les O quand le tir est raté
+** TODO controle des coordonnées de placement : vérifier si le bateau n'est pas trop petit
+** TODO ajouter la prise en compte des minuscules pour la saisie des coordonnées
+** TODO voir si on peut fonctionner avec des chars et enlever les cast (int)
