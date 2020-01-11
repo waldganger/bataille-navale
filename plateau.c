@@ -245,11 +245,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	  tableauJoueurs[numeroJoueur].coordPorteAvions[i][0] = yPoupe;
 	for (i = 0; i < taille; i++)
 	  tableauJoueurs[numeroJoueur].coordPorteAvions[i][1] = xPoupe;
-	
-	/* for (i = 0; i < taille; i++) */
-	/*   for (j= 0; j < 2; j++) */
-	/*     printf(" %d ", tableauJoueurs[numeroJoueur].coordPorteAvions[i][j]); */
-	/* printf("\n"); */
        	break;
 	
       case 4:
@@ -257,11 +252,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	  tableauJoueurs[numeroJoueur].coordCroiseur[i][0] = yPoupe;
 	for (i = 0; i < taille; i++)
 	  tableauJoueurs[numeroJoueur].coordCroiseur[i][1] = xPoupe;
-	
-	/* for (i = 0; i < taille; i++) */
-	/*   for (j= 0; j < 2; j++) */
-	/*     printf(" %d ", tableauJoueurs[numeroJoueur].coordCroiseur[i][j]); */
-	/* printf("\n"); */
        	break;
 
       case 3:
@@ -276,11 +266,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	      tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][0] = yPoupe;
 	    for (i = 0; i < taille; i++)
 	      tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][1] = xPoupe;
-	
-	    /* for (i = 0; i < taille; i++) */
-	    /*   for (j= 0; j < 2; j++) */
-	    /* 	printf(" %d ", tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][j]); */
-	    /* printf("\n"); */
 	    break;
 	  }
 
@@ -290,11 +275,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	      tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][0] = yPoupe;
 	    for (i = 0; i < taille; i++)
 	      tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][1] = xPoupe;
-	
-	    /* for (i = 0; i < taille; i++) */
-	    /*   for (j= 0; j < 2; j++) */
-	    /* 	printf(" %d ", tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][j]); */
-	    /* printf("\n"); */
 	    break;
 	  }
 
@@ -303,11 +283,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	      tableauJoueurs[numeroJoueur].coordTorpilleur[i][0] = yPoupe;
 	    for (i = 0; i < taille; i++)
 	      tableauJoueurs[numeroJoueur].coordTorpilleur[i][1] = xPoupe;
-	
-	    /* for (i = 0; i < taille; i++) */
-	    /*   for (j= 0; j < 2; j++) */
-	    /* 	printf(" %d ", tableauJoueurs[numeroJoueur].coordTorpilleur[i][j]); */
-	    /* printf("\n"); */
 	    break;
 		
 	default:
@@ -327,11 +302,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	  tableauJoueurs[numeroJoueur].coordPorteAvions[i][0] = yPoupe;
 	for (i = 0; i < taille; i++, xPoupe++)
 	  tableauJoueurs[numeroJoueur].coordPorteAvions[i][1] = xPoupe;
-	
-	/* for (i = 0; i < taille; i++) */
-	/*   for (j= 0; j < 2; j++) */
-	/*     printf(" %d ", tableauJoueurs[numeroJoueur].coordPorteAvions[i][j]); */
-	/* printf("\n"); */
        	break;
 	
       case 4:
@@ -339,11 +309,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	  tableauJoueurs[numeroJoueur].coordCroiseur[i][0] = yPoupe;
 	for (i = 0; i < taille; i++, xPoupe++)
 	  tableauJoueurs[numeroJoueur].coordCroiseur[i][1] = xPoupe;
-	
-	/* for (i = 0; i < taille; i++) */
-	/*   for (j= 0; j < 2; j++) */
-	/*     printf(" %d ", tableauJoueurs[numeroJoueur].coordCroiseur[i][j]); */
-	/* printf("\n"); */
        	break;
 
       case 3:
@@ -358,11 +323,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	      tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][0] = yPoupe;
 	    for (i = 0; i < taille; i++, xPoupe++)
 	      tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][1] = xPoupe;
-	
-	    /* for (i = 0; i < taille; i++) */
-	    /*   for (j= 0; j < 2; j++) */
-	    /* 	printf(" %d ", tableauJoueurs[numeroJoueur].coordContreTorpilleur2[i][j]); */
-	    /* printf("\n"); */
 	    break;
 	  }
 
@@ -372,11 +332,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	      tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][0] = yPoupe;
 	    for (i = 0; i < taille; i++, xPoupe++)
 	      tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][1] = xPoupe;
-	
-	    /* for (i = 0; i < taille; i++) */
-	    /*   for (j= 0; j < 2; j++) */
-	    /* 	printf(" %d ", tableauJoueurs[numeroJoueur].coordContreTorpilleur[i][j]); */
-	    /* printf("\n"); */
 	    break;
 	  }
 
@@ -385,11 +340,6 @@ tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
 	      tableauJoueurs[numeroJoueur].coordTorpilleur[i][0] = yPoupe;
 	  for (i = 0; i < taille; i++, xPoupe++)
 	      tableauJoueurs[numeroJoueur].coordTorpilleur[i][1] = xPoupe;
-	
-	    /* for (i = 0; i < taille; i++) */
-	    /*   for (j= 0; j < 2; j++) */
-	    /* 	printf(" %d ", tableauJoueurs[numeroJoueur].coordTorpilleur[i][j]); */
-	    /* printf("\n"); */
 	    break;
 		
 	default:
@@ -506,7 +456,8 @@ int tir(char *pointeurVersBonPlateauMasque)
   if((xTir < 65 || xTir > 74) || (yTir < 1 || yTir > 10))
     printf("Coordonnées erronées.\n");
   /* Test : 2ème tir au même endroit ? */
-  else if (*(pCoordonneesTir + (yTir * NOMBRECOLONNES + (xTir - 64))) == 'X')
+  else if (*(pCoordonneesTir + (yTir * NOMBRECOLONNES + (xTir - 64))) == 'X'
+	   || *(pCoordonneesTir + (yTir * NOMBRECOLONNES + (xTir - 64))) == 'o')
     printf("Vous avez déjà diré à cet endroit.\n");
   else
     controleCoordonneesTir = 0;
@@ -519,21 +470,10 @@ int tir(char *pointeurVersBonPlateauMasque)
 
   int coordonneesTir[2] = {yTir, xTir};
 
-  /* on vérifie le numéro du joueur */
-  //indiceTableauJoueurs = (pCoordonneesTir == &masquePlateauDeJeu1[0][0]) ? 2 : 1;
-  if (pCoordonneesTir == &masquePlateauDeJeu1[0][0]){
-    indiceTableauJoueurs = 1; //le joueur 1 un vise le plateau du joueur 2
+  /* si joueur 1 avec masque de jeu 1, on lie le tir au plateau de jeu du J2 pour vérifier si le tir réussit */
+  indiceTableauJoueurs = (pCoordonneesTir == &masquePlateauDeJeu1[0][0]) ? 1 : 0;
 
-  }
-  else if (pCoordonneesTir == &masquePlateauDeJeu2[0][0]){
-
-    indiceTableauJoueurs = 0; ////le joueur 2 un vise le plateau du joueur 1
-    
-  }
-  else
-    printf("Bug, le pointeur n'est pas reconnu.\n");
-  /* si joueur 1 avec masque de jeu 1, on lie le tir au plateau de jeu du J2 pour vérifier si le tir réussit 
-    Cinq boucles de tailles différentes pour comparer coords tir et coords de chaque navire */
+  /* Cinq boucles avec limite adaptées pour comparer coords tir et coords de chaque navire */
   /* Porte-avions */
     for (i = 0; i < 5 ; i++)
       if (coordonneesTir[0] == tableauJoueurs[indiceTableauJoueurs].coordPorteAvions[i][0] &&
@@ -541,9 +481,9 @@ int tir(char *pointeurVersBonPlateauMasque)
 	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
 	if (--(tableauJoueurs[indiceTableauJoueurs].porteAvions))
-	  printf("Porte-avions touché %d/5!\n", 5 - tableauJoueurs[indiceTableauJoueurs].porteAvions);
+	  printf("Porte-avions touché %d/5!\n\n", 5 - tableauJoueurs[indiceTableauJoueurs].porteAvions);
 	else
-	  printf("Porte-avions coulé !\n");
+	  printf("Porte-avions coulé !\n\n");
 	tour++;
 	return indiceTableauJoueurs;
 	}
@@ -555,9 +495,9 @@ int tir(char *pointeurVersBonPlateauMasque)
 	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
 	if (--(tableauJoueurs[indiceTableauJoueurs].croiseur))
-	printf("Croiseur touché %d/4!\n", 4 - tableauJoueurs[indiceTableauJoueurs].croiseur);
+	printf("Croiseur touché %d/4!\n\n", 4 - tableauJoueurs[indiceTableauJoueurs].croiseur);
 	else
-	  printf("Croiseur coulé !\n");
+	  printf("Croiseur coulé !\n\n");
 	tour++;
 	return indiceTableauJoueurs;
 	}
@@ -569,10 +509,10 @@ int tir(char *pointeurVersBonPlateauMasque)
 	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
 	if (--(tableauJoueurs[indiceTableauJoueurs].contreTorpilleur))
-	printf("Contre-torpilleur No 1 touché %d/3!\n", 3 - tableauJoueurs[indiceTableauJoueurs].contreTorpilleur);
+	printf("Contre-torpilleur No 1 touché %d/3!\n\n", 3 - tableauJoueurs[indiceTableauJoueurs].contreTorpilleur);
 	
 	else
-	  printf("Contre torpilleur No 1 coulé !\n");
+	  printf("Contre torpilleur No 1 coulé !\n\n");
 	tour++;
 	return indiceTableauJoueurs;
 	}
@@ -584,9 +524,9 @@ int tir(char *pointeurVersBonPlateauMasque)
 	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
 	if (--(tableauJoueurs[indiceTableauJoueurs].contreTorpilleur2))
-	printf("Contre-torpilleur No 2 touché %d/3!\n", 3 - tableauJoueurs[indiceTableauJoueurs].contreTorpilleur2);
+	printf("Contre-torpilleur No 2 touché %d/3!\n\n", 3 - tableauJoueurs[indiceTableauJoueurs].contreTorpilleur2);
 	else
-	  printf("Contre torpilleur No 2 coulé !\n");
+	  printf("Contre torpilleur No 2 coulé !\n\n");
 	tour++;
 	return indiceTableauJoueurs;
 	}
@@ -598,12 +538,13 @@ int tir(char *pointeurVersBonPlateauMasque)
 	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
 	if (--(tableauJoueurs[indiceTableauJoueurs].torpilleur))
-	printf("Torpilleur touché %d/2!\n", 2 - tableauJoueurs[indiceTableauJoueurs].torpilleur);
+	printf("Torpilleur touché %d/2!\n\n", 2 - tableauJoueurs[indiceTableauJoueurs].torpilleur);
 	else
-	  printf("Torpilleur coulé !\n");
+	  printf("Torpilleur coulé !\n\n");
 	tour++;
 	return indiceTableauJoueurs;
 	}
+    *(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'o';
     tour++;
     return indiceTableauJoueurs;
 }
@@ -651,5 +592,5 @@ void partie(void)
   }
   
     }
-  printf("Fin de la partie.\n");
+  printf("Fin de la partie.\n\n");
 }
