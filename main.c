@@ -31,11 +31,11 @@ void menuPrincipal(void)
   int choixMenuPrincipal ;
   int choixDuJoueur;
   
-  printf("Bienvenue. Voulez-vous :\n");
-  printf("1. Créer une fiche joueur ?\n");
-  printf("2. Afficher la fiche d'un joueur ?\n");
-  printf("3. Voir la liste des joueurs ?\n");
-  printf("4. Placer vos bateaux ?\n");
+  printf("Bataille navale.\n");
+  printf("1. Créer une fiche joueur\n");
+  printf("2. Afficher la fiche d'un joueur\n");
+  printf("3. Voir la liste des joueurs\n");
+  printf("4. Placer vos bateaux\n");
   printf("5. Démarrer une partie.\n");
   printf("6. Quitter.\n");
   scanf("%d", &choixMenuPrincipal);
@@ -57,8 +57,11 @@ void menuPrincipal(void)
   }
 
   else if (choixMenuPrincipal == 5)
+    {
     partie();
-  
+    menuPrincipal();
+    }
+    
   else if (choixMenuPrincipal == 6)
     quitter();
   else{

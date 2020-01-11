@@ -139,10 +139,10 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '='
 
 	 //rien en haut de la poupe
-	 || *(pCoordsNavire + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe)) == '='
+	 //|| *(pCoordsNavire + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe)) == '='
 	 //rien en bas de la poupe
-	 || *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe)) == '='
-	 || *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
+	 //|| *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe)) == '='
+	 //|| *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
 	 
 	 )
       {
@@ -158,7 +158,7 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
     int copieyPoupe = yPoupe;
     int copiexPoupe = xPoupe;
     
-    for (; xProue > xPoupe; xProue--){
+    for (; xProue >= xPoupe; xProue--){
       
       if ( *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
       	   || *(pCoordsNavire + ((yProue - 1) * NOMBRECOLONNES + xProue)) == '=')
@@ -201,10 +201,10 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '='
 
 	 //rien à gauche de la poupe
-	 || *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe - 1)) == '='
+	 //|| *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe - 1)) == '='
 	 //rien à droite de la poupe
-	 || *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe + 1)) == '='
-	 || *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) == '='
+	 //|| *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe + 1)) == '='
+	 //|| *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) == '='
 
 	 )
       {
@@ -220,7 +220,7 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
     int copieyPoupe = yPoupe;
     int copiexPoupe = xPoupe;
     
-    for(; yProue > yPoupe; yProue--){
+    for(; yProue >= yPoupe; yProue--){
 
       if ( *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue - 1)) == '='
       	   || *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) == '=')

@@ -50,6 +50,8 @@ int aPrintAquiDeTirer(int tour);
 char * afficheMasquePlateauDeJeu(int tour);
 
 int tir(char *pointeurVersBonPlateauMasque); //retourne l'indice du tableau de joueur
+int clrScreen(int indiceTableauJoueurs);
+
 int victoire(int indiceTableauJoueurs);
 
 

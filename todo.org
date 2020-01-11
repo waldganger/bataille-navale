@@ -45,10 +45,13 @@ sinon
 affiche O dans le plateau masque du joueur
 loop - paramètres : numero joueur, son plateau masque.
 
-** TODO A faire : tir au meme endroit : si l'endroit est déjà marqué d'un X, message d'erreur.
+** DONE A faire : tir au meme endroit : si l'endroit est déjà marqué d'un X, message d'erreur.
 ** DONE le décompte des points doit se faire de 0 à nombre de points de vie
-** TODO affichage du masque avec le tir du joueur avant de changer de tour
-** TODO afficher les O quand le tir est raté
-** TODO controle des coordonnées de placement : vérifier si le bateau n'est pas trop petit
+** DONE afficher les O quand le tir est raté
+** DONE Vérification si tir raté 2 fois au même endroit.
+** DONE Entre victoire et tir, insérer fn qui demande d'appuyer sur une touche pr changer de tour et qui efface l'écran avant de changer de tour.
+** DONE affichage du masque avec le tir du joueur avant de changer de tour
+** DONE controle des coordonnées de placement : vérifier si le bateau n'est pas trop petit
 ** TODO ajouter la prise en compte des minuscules pour la saisie des coordonnées
 ** TODO voir si on peut fonctionner avec des chars et enlever les cast (int)
+** DONE modifier 2e boucles for de test de chevauchement pour inclure Xpoupe et Ypoupe
