@@ -19,11 +19,11 @@ extern int tour;
 typedef struct joueur
 {
   signed char nom[256];
-  int porteAvions;
-  int croiseur;
-  int contreTorpilleur;
-  int contreTorpilleur2;
-  int torpilleur;
+  unsigned char porteAvions;
+  unsigned char croiseur;
+  unsigned char contreTorpilleur;
+  unsigned char contreTorpilleur2;
+  unsigned char torpilleur;
   
   int coordPorteAvions[5][2];
   int coordCroiseur[4][2];

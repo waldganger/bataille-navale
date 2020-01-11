@@ -1,14 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-/* #ifdef _WIN32 */
-/* #include <conio.h> */
-/* #include <ctype.h> */
-/* #else */
-/* #include <stdio.h> */
-//#define clrscr() printf("\e[1;1H\e[2J")
-//#endif
-
 #include "plateau.h"
 
 #define NOMBRELIGNES 11
@@ -137,14 +128,7 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 	 || *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1)) == '='
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) == '='
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '='
-
-	 //rien en haut de la poupe
-	 //|| *(pCoordsNavire + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe)) == '='
-	 //rien en bas de la poupe
-	 //|| *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe)) == '='
-	 //|| *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
-	 
-	 )
+  	 )
       {
 	/* les bateaux se chevauchent ou sont collés : on fait un reset des coords entrées */
 	*(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
@@ -199,13 +183,6 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 	 || *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1)) == '='
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) == '='
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '='
-
-	 //rien à gauche de la poupe
-	 //|| *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe - 1)) == '='
-	 //rien à droite de la poupe
-	 //|| *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe + 1)) == '='
-	 //|| *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) == '='
-
 	 )
       {
 	/* les bateaux se chevauchent ou sont collés : on fait un reset des coords entrées */
@@ -246,18 +223,7 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 
 
 void memCoordonnees(int numeroJoueur, int xPoupe, int yPoupe, int vertical, int taille)
-
-/* 
-copie des coordonnées dans array tableauJoueurs[numeroJoueur].coordPorteAvions[5][2]
-tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] = {
-{65 , 2}
-{66 , 2}
-{67 , 2}
-{68 , 2}
-{69 , 2}
-}
- */
-  
+/* copie des coordonnées dans array tableauJoueurs[numeroJoueur].coordPorteAvions[5][2] */
 {
   numeroJoueur--;		/* creeJoueur a déjà incrémenté de 1, on recule */
   int i, j;
