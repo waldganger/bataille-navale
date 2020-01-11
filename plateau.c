@@ -1,4 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+/* #ifdef _WIN32 */
+/* #include <conio.h> */
+/* #include <ctype.h> */
+/* #else */
+/* #include <stdio.h> */
+//#define clrscr() printf("\e[1;1H\e[2J")
+//#endif
 
 #include "plateau.h"
 
@@ -87,9 +96,10 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
   if((xProue < 65 || xProue > 74) || (yProue < 1 || yProue > 10)
      /* Test : cases en diagonale ? */
      || (xProue != xPoupe + 64 && yProue != yPoupe) /* XPoupe +64 pour comparer vals ASCII */
-     /* Test : le bateau est trop grand ? */
-     || ((xProue > (xPoupe + 64) + (taille - 1)) ||
-	 (yProue > yPoupe + (taille - 1)))
+     /* Test : le bateau est trop grand ou trop petit ? */
+     /* || ((xProue > (xPoupe + 64) + (taille - 1)) || */
+     /* 	 (yProue > yPoupe + (taille - 1))) */
+     || ((xProue - (taille - 1) != (xPoupe + 64)) && (yProue - (taille - 1) != yPoupe))
      ){
     *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
     *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '~'; // on efface la proue
@@ -126,7 +136,15 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 	 || *(pCoordsNavire + ((yPoupe -1) * NOMBRECOLONNES + xPoupe - 1)) == '='
 	 || *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1)) == '='
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) == '='
-	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '=')
+	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '='
+
+	 //rien en haut de la poupe
+	 || *(pCoordsNavire + ((yPoupe - 1) * NOMBRECOLONNES + xPoupe)) == '='
+	 //rien en bas de la poupe
+	 || *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe)) == '='
+	 || *(pCoordsNavire + ((yProue + 1) * NOMBRECOLONNES + xProue)) == '='
+	 
+	 )
       {
 	/* les bateaux se chevauchent ou sont collés : on fait un reset des coords entrées */
 	*(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
@@ -180,7 +198,15 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 	 || *(pCoordsNavire + ((yPoupe -1) * NOMBRECOLONNES + xPoupe - 1)) == '='
 	 || *(pCoordsNavire + ((yPoupe + 1) * NOMBRECOLONNES + xPoupe - 1)) == '='
 	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue - 1)) == '='
-	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '=')
+	 || *(pCoordsNavire + ((yProue +1) * NOMBRECOLONNES + xProue + 1)) == '='
+
+	 //rien à gauche de la poupe
+	 || *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe - 1)) == '='
+	 //rien à droite de la poupe
+	 || *(pCoordsNavire + (yPoupe * NOMBRECOLONNES + xPoupe + 1)) == '='
+	 || *(pCoordsNavire + (yProue * NOMBRECOLONNES + xProue + 1)) == '='
+
+	 )
       {
 	/* les bateaux se chevauchent ou sont collés : on fait un reset des coords entrées */
 	*(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
@@ -484,7 +510,7 @@ int tir(char *pointeurVersBonPlateauMasque)
 	coordonneesTir[1] == tableauJoueurs[indiceTableauJoueurs].coordPorteAvions[i][1])
 	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
-	afficheMasquePlateauDeJeu(tour);
+	
 	if (--(tableauJoueurs[indiceTableauJoueurs].porteAvions))
 	  printf("Porte-avions touché %d/5!\n\n", 5 - tableauJoueurs[indiceTableauJoueurs].porteAvions);
 	else
@@ -554,6 +580,19 @@ int tir(char *pointeurVersBonPlateauMasque)
     return indiceTableauJoueurs;
 }
 
+int clrScreen(int indiceTableauJoueurs)
+{
+  
+  afficheMasquePlateauDeJeu(tour - 1); // le tour a déjà été incrémenté par tir();
+  printf("Appuyez sur entrée pour changer de tour.\n");
+  //scanf(" %1c", &touche);
+  getchar();
+  getchar();
+  system("@cls||clear");
+  //clrscr();
+  //efface l'écran d'un terminal GNU/Linux ou Windows.
+  return indiceTableauJoueurs;
+}
 
 int victoire(int indiceTableauJoueurs)
 /* détecte la vitoire et retourne le signal de fin de partie 
@@ -580,7 +619,8 @@ void partie(void)
   while(1)
     {
       int ctrlVictoire;
-      ctrlVictoire = victoire(tir(afficheMasquePlateauDeJeu(aPrintAquiDeTirer(tour))));
+      //clrScreen();
+      ctrlVictoire = victoire(clrScreen(tir(afficheMasquePlateauDeJeu(aPrintAquiDeTirer(tour)))));
       
       if (ctrlVictoire == 0 )
 	{
