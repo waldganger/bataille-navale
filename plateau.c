@@ -391,6 +391,16 @@ void plateauxMasquesinit(void)
       }
 }
 
+int aPrintAquiDeTirer(int tour)
+{
+  if(tour % 2) 		/* joueur 1 si tour impair */
+    printf("*** Tour n° %d. A %s de tirer !\n", tour, tableauJoueurs[0].nom);
+  else
+    printf("*** Tour n° %d. A %s de tirer !\n", tour, tableauJoueurs[1].nom);
+  return tour;
+}
+
+
 char * afficheMasquePlateauDeJeu(int tour)
 {
   int i, j;
@@ -399,15 +409,9 @@ char * afficheMasquePlateauDeJeu(int tour)
   char *pOrdonnees = NULL;
   
   if(tour % 2) 		/* joueur 1 si tour impair */
-    {
     pointeurmasque = pAbcisses = pOrdonnees = &masquePlateauDeJeu1[0][0];
-    printf("*** Tour n° %d. A %s de tirer !\n", tour, tableauJoueurs[0].nom);
-    }
   else
-    {
     pointeurmasque = pAbcisses = pOrdonnees = &masquePlateauDeJeu2[0][0];
-    printf("*** Tour n° %d. A %s de tirer !\n", tour, tableauJoueurs[1].nom);
-    }
 
 /* --- affichage des indices --- */
      pAbcisses++;			/* On décale le pointeur d'une colonne. */
@@ -480,6 +484,7 @@ int tir(char *pointeurVersBonPlateauMasque)
 	coordonneesTir[1] == tableauJoueurs[indiceTableauJoueurs].coordPorteAvions[i][1])
 	{
 	*(pCoordonneesTir + (yTir * NOMBRECOLONNES +xTir)) = 'X';
+	afficheMasquePlateauDeJeu(tour);
 	if (--(tableauJoueurs[indiceTableauJoueurs].porteAvions))
 	  printf("Porte-avions touché %d/5!\n\n", 5 - tableauJoueurs[indiceTableauJoueurs].porteAvions);
 	else
@@ -575,7 +580,7 @@ void partie(void)
   while(1)
     {
       int ctrlVictoire;
-      ctrlVictoire = victoire(tir(afficheMasquePlateauDeJeu(tour)));
+      ctrlVictoire = victoire(tir(afficheMasquePlateauDeJeu(aPrintAquiDeTirer(tour))));
       
       if (ctrlVictoire == 0 )
 	{

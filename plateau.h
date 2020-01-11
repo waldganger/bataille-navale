@@ -46,7 +46,7 @@ void deploiementFlotte(void);
 void partie(void);
 void plateauxMasquesinit(void);
 
-
+int aPrintAquiDeTirer(int tour);
 char * afficheMasquePlateauDeJeu(int tour);
 
 int tir(char *pointeurVersBonPlateauMasque); //retourne l'indice du tableau de joueur
