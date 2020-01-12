@@ -61,19 +61,22 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
 {
   char xPoupe;			/* abcisses 0ABCDEFGHIJ */
   int yPoupe;			/* ordonnées 012345678910 */
-  int vertical = 0;		/* pour la fonction memCoordonnées. Par défaut, horizontal. */
+  int vertical = 0;		/* pour la fn memCoordonnées. Par défaut, horizontal. */
+  int decalageX;
   char *pCoordsNavire = ptableau;
     
     /* -------------- POUPE--------------- */
   printf("Entrez les coordonnées de la poupe de votre %s.\nEx : B 6 ou J7\n", typeNavire);
   scanf(" %1c%2d", &xPoupe, &yPoupe); // espace pour éviter un bug
   /* Test : case dans le cadre ? */
-  if((xPoupe < 65 || xPoupe > 74) || (yPoupe < 1 || yPoupe > 10)){
+  if(((xPoupe < 65 || xPoupe > 74) && (xPoupe < 97 || xPoupe > 106))
+     || (yPoupe < 1 || yPoupe > 10)){
     printf("Coordonnées erronées.\n");
     return 1;
   }
   printf("Vous avez entré les coordonnées %c - %d\n", xPoupe, yPoupe);
-  xPoupe -= 64;
+  decalageX = (xPoupe > 74) ? 96 : 64;
+  xPoupe -= decalageX;
   *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '=';
 
   /* -------------- PROUE--------------- */
@@ -83,13 +86,14 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
   printf("Entrez les coordonnées de la proue votre %s.\nEx : B 6 ou J7\n", typeNavire);
   scanf(" %1c%2d", &xProue, &yProue);
   /* Test : case hors du cadre ? */
-  if((xProue < 65 || xProue > 74) || (yProue < 1 || yProue > 10)
+  if(((xProue < 65 || xProue > 74) && (xProue < 97 || xProue > 106))
+     || (yProue < 1 || yProue > 10)
      /* Test : cases en diagonale ? */
-     || (xProue != xPoupe + 64 && yProue != yPoupe) /* XPoupe +64 pour comparer vals ASCII */
+     || (xProue != xPoupe + (decalageX = (xProue > 74) ? 96 : 64) && yProue != yPoupe) /* XPoupe +64 pour comparer vals ASCII */
      /* Test : le bateau est trop grand ou trop petit ? */
      /* || ((xProue > (xPoupe + 64) + (taille - 1)) || */
      /* 	 (yProue > yPoupe + (taille - 1))) */
-     || ((xProue - (taille - 1) != (xPoupe + 64)) && (yProue - (taille - 1) != yPoupe))
+     || ((xProue - (taille - 1) != (xPoupe + decalageX)) && (yProue - (taille - 1) != yPoupe))
      ){
     *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '~'; // on efface la poupe
     *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '~'; // on efface la proue
@@ -97,7 +101,7 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
     return 1;
   }
   printf("Vous avez entré les coordonnées %c - %d\n", xProue, yProue);
-  xProue -= 64;
+  xProue -= decalageX;
   *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '=';
 
   
