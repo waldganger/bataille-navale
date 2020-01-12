@@ -43,7 +43,7 @@ void memCoordonnees(int numeroJoueur, int Xpoupe, int yPoupe, int vertical, int 
 char * switchPlateau(void);
 void deploiementFlotte(void);
 
-void partie(void);
+int partie(void);
 void plateauxMasquesinit(void);
 
 int aPrintAquiDeTirer(int tour);

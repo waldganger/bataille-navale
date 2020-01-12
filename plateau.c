@@ -580,8 +580,13 @@ int victoire(int indiceTableauJoueurs)
     return indiceTableauJoueurs; /* 0 ou 1 */
 }
 
-void partie(void)
+int partie(void)
 {
+  if (numeroJoueur < 1)
+    {
+      printf("Pas assez de joueurs pour commencer une partie.\n\n");
+      return -1;
+    }
   plateauxMasquesinit();
   
   while(1)
@@ -606,4 +611,5 @@ void partie(void)
   
     }
   printf("Fin de la partie.\n\n");
+  return 0;
 }

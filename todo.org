@@ -52,7 +52,7 @@ loop - paramètres : numero joueur, son plateau masque.
 ** DONE Entre victoire et tir, insérer fn qui demande d'appuyer sur une touche pr changer de tour et qui efface l'écran avant de changer de tour.
 ** DONE affichage du masque avec le tir du joueur avant de changer de tour
 ** DONE controle des coordonnées de placement : vérifier si le bateau n'est pas trop petit
-** TODO ajouter la prise en compte des minuscules pour la saisie des coordonnées
+** DONE ajouter la prise en compte des minuscules pour la saisie des coordonnées
 ** DONE voir si on peut fonctionner avec des chars et enlever les cast (int)
 76
 101

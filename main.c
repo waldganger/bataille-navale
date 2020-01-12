@@ -13,7 +13,7 @@ int tour = 1;
 int numeroJoueur = 0;
 
 
-void menuPrincipal(void);
+int menuPrincipal(void);
 void creeJoueur(void);
 void afficheFicheJoueur(int numeroJoueur);
 void afficheTableauJoueurs (void);
@@ -26,7 +26,7 @@ int main(void)
   return 0;
 }
 
-void menuPrincipal(void)
+int menuPrincipal(void)
 {
   int choixMenuPrincipal ;
   int choixDuJoueur;
@@ -35,45 +35,43 @@ void menuPrincipal(void)
   printf("1. Créer une fiche joueur\n");
   printf("2. Afficher la fiche d'un joueur\n");
   printf("3. Voir la liste des joueurs\n");
-  printf("4. Placer vos bateaux\n");
-  printf("5. Démarrer une partie.\n");
-  printf("6. Quitter.\n");
+  printf("4. Démarrer une partie.\n");
+  printf("5. Quitter.\n");
   scanf("%d", &choixMenuPrincipal);
-  
-  if(choixMenuPrincipal == 1){
-    initialisationJoueur();
-}
-  
-  else if(choixMenuPrincipal == 2){
-    printf("Quelle fiche joueur voulez-vous consulter ?\n");
-    scanf("%d", &choixDuJoueur);
-    afficheFicheJoueur(choixDuJoueur - 1);
-    menuPrincipal();
-  }
-  else if (choixMenuPrincipal == 3)
-    afficheTableauJoueurs();
-  else if (choixMenuPrincipal == 4){
-    
-  }
 
-  else if (choixMenuPrincipal == 5)
+  switch(choixMenuPrincipal)
     {
-    partie();
-    menuPrincipal();
+    case 1:
+      initialisationJoueur();
+      break;
+    case 2:
+      printf("Quelle fiche joueur voulez-vous consulter ?\n");
+      scanf("%d", &choixDuJoueur);
+      afficheFicheJoueur(choixDuJoueur - 1);
+      menuPrincipal();
+      break;
+    case 3:
+      afficheTableauJoueurs();
+      menuPrincipal();
+      break;
+    case 4:
+      partie();
+      menuPrincipal();
+      break;
+    case 5:
+      quitter();
+      break;
+    default:
+      printf("\nMauvaise entrée. Veuillez vous REPRENDRE.\n");
+      printf("Appuyez sur une touche pour revenir au menu principal.\n");
+      getchar();
+      putchar('\n');
+      menuPrincipal();
+    break;
     }
-    
-  else if (choixMenuPrincipal == 6)
-    quitter();
-  else{
-    printf("\nMauvaise entrée. Veuillez VOUS REPRENDRE.\n");
-    printf("Appuyez sur une touche pour revenir au menu principal.\n");
-    getchar();
-    putchar('\n');
-    main();
-  }
+  return 0;
 }
   
-
 void creeJoueur(void)
 {
   // extern int numeroJoueur;
