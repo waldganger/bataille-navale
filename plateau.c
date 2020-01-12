@@ -443,6 +443,7 @@ int tir(char *pointeurVersBonPlateauMasque)
   char *pCoordonneesTir = pointeurVersBonPlateauMasque;
   int controleCoordonneesTir = 1;
   int indiceTableauJoueurs = 1;
+  int decalageX;
   int i;
  
   /* Le joueur entre ses coordonnées de tir */
@@ -450,19 +451,21 @@ int tir(char *pointeurVersBonPlateauMasque)
     {
   printf("Entrez les coordonnées de tir.\n Ex : B 6 ou J7\n");
   scanf(" %1c%2d", &xTir, &yTir); // espace pour éviter un bug
+  decalageX = (xTir > 74) ? 96 : 64;
   /* Test : case dans le cadre ? */
-  if((xTir < 65 || xTir > 74) || (yTir < 1 || yTir > 10))
+  if(((xTir < 65 || xTir > 74) && (xTir < 97 || xTir > 106))
+     || (yTir < 1 || yTir > 10))
     printf("Coordonnées erronées.\n");
   /* Test : 2ème tir au même endroit ? */
-  else if (*(pCoordonneesTir + (yTir * NOMBRECOLONNES + (xTir - 64))) == 'X'
-	   || *(pCoordonneesTir + (yTir * NOMBRECOLONNES + (xTir - 64))) == 'o')
+  else if (*(pCoordonneesTir + (yTir * NOMBRECOLONNES + (xTir - decalageX))) == 'X'
+	   || *(pCoordonneesTir + (yTir * NOMBRECOLONNES + (xTir - decalageX))) == 'o')
     printf("Vous avez déjà diré à cet endroit.\n");
   else
     controleCoordonneesTir = 0;
     }
   
   printf("TIR en %c - %d\n", xTir, yTir);
-  xTir -= 64;
+  xTir -= decalageX;
   int coordonneesTir[2] = {yTir, xTir};
 
   /* si joueur 1 avec masque de jeu 1, on lie le tir au plateau de jeu du J2 pour vérifier si le tir réussit */
