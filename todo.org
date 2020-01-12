@@ -53,5 +53,8 @@ loop - paramètres : numero joueur, son plateau masque.
 ** DONE affichage du masque avec le tir du joueur avant de changer de tour
 ** DONE controle des coordonnées de placement : vérifier si le bateau n'est pas trop petit
 ** TODO ajouter la prise en compte des minuscules pour la saisie des coordonnées
-** TODO voir si on peut fonctionner avec des chars et enlever les cast (int)
+** DONE voir si on peut fonctionner avec des chars et enlever les cast (int)
+76
+101
+464
 ** DONE modifier 2e boucles for de test de chevauchement pour inclure Xpoupe et Ypoupe

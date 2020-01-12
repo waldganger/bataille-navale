@@ -73,7 +73,6 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
     return 1;
   }
   printf("Vous avez entré les coordonnées %c - %d\n", xPoupe, yPoupe);
-  (int) xPoupe;
   xPoupe -= 64;
   *(pCoordsNavire + (yPoupe * NOMBRECOLONNES +xPoupe)) = '=';
 
@@ -98,7 +97,6 @@ int placeBateau(char *ptableau, char typeNavire[], int taille)
     return 1;
   }
   printf("Vous avez entré les coordonnées %c - %d\n", xProue, yProue);
-  (int) xProue;
   xProue -= 64;
   *(pCoordsNavire + (yProue * NOMBRECOLONNES +xProue)) = '=';
 
@@ -460,10 +458,7 @@ int tir(char *pointeurVersBonPlateauMasque)
     }
   
   printf("TIR en %c - %d\n", xTir, yTir);
-  
-  (int) xTir;
   xTir -= 64;
-
   int coordonneesTir[2] = {yTir, xTir};
 
   /* si joueur 1 avec masque de jeu 1, on lie le tir au plateau de jeu du J2 pour vérifier si le tir réussit */
