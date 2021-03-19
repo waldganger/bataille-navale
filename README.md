@@ -17,6 +17,6 @@ Exemple de compilation avec GCC :
 
 Antony Merle
 
-## License
+## Licence
 
 Domaine public
