@@ -7,8 +7,8 @@
 #define TAILLE_MAX_TABLEAU 2	/* nombre de joueurs max */
 
 
-extern int numeroJoueur ;
-extern int tour ;
+int numeroJoueur ;
+int tour ;
 int tour = 1;
 int numeroJoueur = 0;
 

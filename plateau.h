@@ -9,10 +9,11 @@
 extern char plateauDeJeu1[NOMBRELIGNES][NOMBRECOLONNES];
 extern char plateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
 
-char masquePlateauDeJeu1[NOMBRELIGNES][NOMBRECOLONNES];
-char masquePlateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
+extern char masquePlateauDeJeu1[NOMBRELIGNES][NOMBRECOLONNES];
+extern char masquePlateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
 
 extern int tour;
+extern int numeroJoueur;
 
 
 

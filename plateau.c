@@ -11,7 +11,7 @@ char plateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
 char masquePlateauDeJeu1[NOMBRELIGNES][NOMBRECOLONNES];
 char masquePlateauDeJeu2[NOMBRELIGNES][NOMBRECOLONNES];
 
-int numeroJoueur;
+/*int numeroJoueur;*/
 joueur tableauJoueurs[];
 
 void plateauInit(char *ptableau)
